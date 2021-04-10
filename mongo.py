@@ -1,7 +1,7 @@
 import os
 import pymongo
 if os.path.exists("env.py"):
-    import env
+       import env
 
 
 MONGO_URI = os.environ.get("MONGO_URI")
@@ -22,6 +22,5 @@ conn = mongo_connect(MONGO_URI)
 
 coll = conn[DATABASE][COLLECTION]
 
-
-for doc in documents:
-    print(doc)
+for doc in documents
+print(doc)
