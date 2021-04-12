@@ -9,13 +9,12 @@
 </head>
 
 <body>
-        {% for recipe in recipes %}
-        {{recipe.recipe_name}}<br>
-        {{recipe.category_name}}<br>
-        {{recipe.smoothie}}<br>
-        {{recipe.description}}<br>
-        {{recipe.prep_time}}<br>
-        {{recipe.total_time}}<br>
+        {% for recipes in recipes %}
+        {{recipes.category_name}}<br>
+        {{recipes.smoothie}}<br>
+        {{recipes.recipe}}<br>
+        {{recipes.prep_time}}<br>
+        {{recipes.total_time}}<br>
         {% endfor %}
 </body>
 
