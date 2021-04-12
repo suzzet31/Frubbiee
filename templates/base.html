@@ -14,8 +14,41 @@
     {% block styles %}
     {% endblock %}
     <title>Frubbie Drinks</title>
-
 </head>
+<header>
+    <!-- main top bar -->
+    <nav class="nav-extended text-shadow cyan darken-4">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Frubbiee Drinks</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{url_for('get_recipes') }}">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Frubbiee Drinks</a></li>
+                <li><a href="#">Recipes</a></li>
+                <li><a href="#">users Recipes</a></li>
+                <li><a href="#">Log out</a></li>
+                <li><a href="#">Log in</a></li>
+                <li><a href="#">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- mobile sidenav -->
+    <ul class="sidenav" id="mobile-demo">
+        <li>
+            <h4 class="center-align light-blue-text text-darken-4 ">Frubbiee Drinks</h4>
+        </li>
+        <li><a href="{{url_for('get_recipes') }}">Home</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Frubbiee Drinks</a></li>
+        <li><a href="#">Recipes</a></li>
+        <li><a href="#">New Recipes</a></li>
+        <li><a href="#">Log out</a></li>
+        <li><a href="#">Log in</a></li>
+        <li><a href="#">Register</a></li>
+    </ul>
+
+</header>
 
 <body>
     <h1> Fresh tasty drinks!</h1>
