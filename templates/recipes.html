@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Frubbie Drinks</title>
-</head>
+<h2> I'm Extending the base template!</h2>
 
-<body>
-        {% for recipes in recipes %}
-        {{recipes.category_name}}<br>
-        {{recipes.smoothie}}<br>
-        {{recipes.recipe}}<br>
-        {{recipes.prep_time}}<br>
-        {{recipes.total_time}}<br>
-        {% endfor %}
-</body>
+{% for recipes in recipes %}
+{{recipes.category_name}}<br>
+{{recipes.smoothie}}<br>
+{{recipes.recipe}}<br>
+{{recipes.prep_time}}<br>
+{{recipes.total_time}}<br>
+{% endfor %}
 
-</html>
+{% endblock %}
