@@ -17,18 +17,18 @@
 </head>
 <header>
     <!-- main top bar -->
-    <nav class="nav-extended text-shadow  teal darken-4">
+    <nav class="nav-extended text-shadow  cyan darken-4">
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo">Frubbiee Drinks</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{url_for('get_recipes') }}">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="{{url_for('profile',username=session['user']) }}">Profile</a></li>
                 <li><a href="#">Frubbiee Drinks</a></li>
                 <li><a href="#">User Recipes</a></li>
                 <li><a href="#">New Recipes</a></li>
                 <li><a href="#">Log out</a></li>
-                <li><a href="#">Log in</a></li>
+                <li><a href="{{url_for('login') }}">Log in</a></li>
                 <li><a href="{{url_for('register') }}">Register</a></li>
             </ul>
         </div>
@@ -36,28 +36,28 @@
     <!-- mobile sidenav -->
     <ul class="sidenav" id="mobile-demo">
         <li>
-            <h4 class="center-align light-blue-text text-darken-4 ">Frubbiee Drinks</h4>
+            <h4 class="center-align cyan darken-4 text-darken-4 ">Fubbiee</h4>
         </li>
         <li><a href="{{url_for('get_recipes') }}">Home</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="{{url_for('profile',username=session['user']) }}">Profile</a></li>
         <li><a href="#">Frubbiee Drinks</a></li>
         <li><a href="#">Recipes</a></li>
         <li><a href="#">New Recipes</a></li>
         <li><a href="#">Log out</a></li>
-        <li><a href="]">Log in</a></li>
+        <li><a href="{{url_for('login') }}">Log in</a></li>
         <li><a href="{{url_for('register') }}">Register</a></li>
     </ul>
 </header>
 
 <body>
-    <h1> Fresh tasty drinks!</h1>
+    <h3> Fresh tasty drinks !</h3>
     <section>
         <!-- flash messages -->
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
         <div class="row flashes">
-            <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
+            <h4 class=" grey lighten-3 grey darken-4 center-align">{{ message }}</h4>
         </div>
         {% endfor %}
         {% endif %}
