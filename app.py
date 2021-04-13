@@ -26,7 +26,7 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         # check if username already exits in db
@@ -34,7 +34,7 @@ def register():
             {"username": request.form.get("username").lower()})
         
         if existing_user:
-            flash("username already exists")
+            flash("Username already exists")
             return redirect(url_for("register"))
            
         register = {
