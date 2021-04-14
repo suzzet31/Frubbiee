@@ -18,12 +18,38 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+posts = [
+    {
+        'user': 'Suzzet Mc D',
+        'title': 'Recipe Post 1',
+        'content': 'First post content',
+        'date': 'April 27,2017'
+    },
+      {
+        'user': 'Jane Doe',
+        'title': 'Recipe Post 2',
+        'content': 'Second post content',
+        'date': 'May 02,2017'
+    },
+]
 
 @app.route("/")
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
     return render_template("recipes.html", recipes=recipes)
+
+
+@app.route("/posts")
+def posts():
+    posts = list(mongo.db.posts.find())
+    return render_template("posts.html", posts=posts)
+
+
+@app.route("/about")
+def about():
+    about = list(mongo.db.about.find())
+    return render_template("about.html", about=about, title='About')
 
 
 @app.route("/register", methods=["GET", "POST"])
