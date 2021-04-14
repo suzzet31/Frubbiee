@@ -18,20 +18,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-posts = [
-    {
-        'user': 'Suzzet Mc D',
-        'title': 'Recipe Post 1',
-        'content': 'First post content',
-        'date': 'April 27,2017'
-    },
-      {
-        'user': 'Jane Doe',
-        'title': 'Recipe Post 2',
-        'content': 'Second post content',
-        'date': 'May 02,2017'
-    },
-]
 
 @app.route("/")
 @app.route("/get_recipes")
@@ -44,6 +30,12 @@ def get_recipes():
 def posts():
     posts = list(mongo.db.posts.find())
     return render_template("posts.html", posts=posts)
+
+
+@app.route("/about")
+def about():
+    about = list(mongo.db.about.find())
+    return render_template("about.html", about=about, title='Frubbiee')
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -87,6 +79,7 @@ def login():
                             request.form.get("username")))
                         return redirect(url_for(
                             "profile", username=session["user"]))
+                        
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
