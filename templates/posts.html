@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if title %}
+{% else %}
+<title>Frubbie Drinks</title>
+{% endif%}
+
 <body>
     {% for posts in posts %}
     <h1>{{ posts.title }}</h1>

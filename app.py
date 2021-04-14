@@ -46,12 +46,6 @@ def posts():
     return render_template("posts.html", posts=posts)
 
 
-@app.route("/about")
-def about():
-    about = list(mongo.db.about.find())
-    return render_template("about.html", about=about, title='About')
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -123,6 +117,6 @@ def logout():
 
 
 if __name__ == "__main__":
-  app.run(host=os.environ.get("IP"),
+    app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
