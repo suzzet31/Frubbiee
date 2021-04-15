@@ -6,6 +6,14 @@ $(document).ready(function () {
     });
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
-    $('.modal').modal();
-    M.updateTextFields();
+    $('.datepicker').datepicker({
+        format: 'dd mmmm, yyyy',
+        yearRange: 3,
+        showClearBtn: true,
+        i18n: {
+            done: 'Select'
+        }
+    });
+});
+instance.gotoDate(new Date());
 });
