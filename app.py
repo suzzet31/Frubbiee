@@ -34,8 +34,7 @@ def posts():
 
 @app.route("/about")
 def about():
-    about = list(mongo.db.about.find())
-    return render_template("about.html", about=about, title='Frubbiee')
+    return render_template("about.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -106,6 +105,11 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/add_recipes")
+def add_recipes():
+    return render_template("add_recipes.html")
 
 
 if __name__ == "__main__":

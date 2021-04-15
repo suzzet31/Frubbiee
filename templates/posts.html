@@ -1,16 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if title %}
-{% else %}
 <title>Frubbie Drinks</title>
-{% endif%}
 
 <body>
-    {% for posts in posts %}
-    <h1>{{ posts.title }}</h1>
-    <p> By {{ posts.author }} on {{ posts.date_posted }}</p>
-    <p> {{ posts.content }}</p>
-    {% endfor %}
+
 </body>
 {% endblock %}
