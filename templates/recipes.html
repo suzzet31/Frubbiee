@@ -1,19 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2> I'm Extending the base template!</h2>
-
-{% for recipes in recipes %}
-{{recipes.category_name}}<br>
-{{recipes.drink_name}}<br>
-{{recipes.smoothie_type}}<br>
-{{recipes.description}}<br>
-{{recipes.recipe}}<br>
-{{recipes.update_recipe}}<br>
-{{recipes.prep_time}}<br>
-{{recipes.is_favourite}}<br>
-{{recipes.total_time}}<br>
-{% endfor %}
+<h3 class="light-blue-text text-darken-4 center-align">Frubbiee drinks</h3>
 
 <ul class="collapsible">
     {% for recipes in recipes %}
@@ -21,28 +9,30 @@
         <div class="collapsible-header black-text  teal lighten-3 lighten-3">
             <i class="fas fa-caret-down"></i>
             <strong>{{recipes.category_name}}</strong> :
-            <strong>{{recipes.category_name}}</strong> :
-            <strong>{{recipes.description}}</strong>
+            <strong>{{recipes.drink_type}}</strong>
         </div>
         <div class="collapsible-body">
-            <strong>{{recipes.smoothie_type}}</strong>
-            <p>{{recipes.recipe}}</p>
-            <p>{{recipes.prep_time}}</p>
-            <p>{{recipes.update_recipe}}<br></p>
-            <p>
-                <p>{{recipes.date}}</p>
+            <strong>{{recipes.smoothie_name}}</strong>
+            <p>{{recipes.recipe_description}}</p>
+            <p>{{recipes.prep_time}}</p><br>
             </p>
             <div class="button  btn-lighten-3">
-                {% if recipes.is_favourite == "on" %}
+                {% if recipes.my_favourite == "on" %}
                 <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped" data-positiob="right"
                     data-tooltip="My favourite"></i>
             </div>
             {% endif%}
+        </div>
+        <div class="collapsible-body">
+            <strong>{{ recipes.category_name}}</strong>
+            <p>{{ recipes.recipe_description}}</p>
+            <p><em></em>{{ recipes.created_by}}</em></p>
+
+        </div>
 
         </div>
     </li>
     {% endfor %}
-</ul>
-</div>
+</ul>ul
 
 {% endblock %}

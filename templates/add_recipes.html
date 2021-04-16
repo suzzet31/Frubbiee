@@ -1,55 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-<h3 class="light-teal-text text-darken-4 center-align">Add Recipes</h3>
+
+<h3 class="light-blue-text text-darken-4 center-align">Frubbiee</h3>
+
 <div class="row card-panel grey lighten-5">
-   <form class="col s12" method="POST" action="">
+
+   <form class="col s12" method="POST" action="{{ url_for('add_recipes') }}">
+      <!-- category selection -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-bookmark prefix light-leal-text text-darken-4 "></i>
-            <select id="category_name" name="category_name" type="text" class="validate" required>
-               <option value="" disabled selected>Choose category</option>
+            <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+            <select id="category_name" name="category_name" class="validate" required>
+               <option value="" disabled selected>Choose Category</option>
                {% for category in categories %}
-               <option value="{{category.category_name }}">{{category.category_name }}</option>
+               <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                {% endfor %}
             </select>
-            <label for="category_name">Fruit drink </label>
+            <label for="category_name">Frubbiee category</label>
          </div>
       </div>
+      <!-- drink name -->
       <div class="row">
          <div class="input-field col s12">
             <i class="fas fa-pen prefix light-leal-text text-darken-4 "></i>
-            <input id="drink_name" name="drink_name" minlenght="5" maxlength="50" type="text" class="validate" required>
-            <label for="drink_name">Drink Name</label>
+            <input id="drink_type" name="drink_type" minlenght="5" maxlength="50" type="text" class="validate" required>
+            <label for="drink_type">Drink Type</label>
          </div>
       </div>
+      <!-- smoothie name -->
       <div class="row">
          <div class="input-field col s12">
             <i class="fas fa-align-left prefix light-teal-text text-darken-4 "></i>
-            <textarea id="smoothie_type" name="smoothie_type" class="materialize-textarea validate" required></textarea>
-            <label for="smoothie_type">Type of Smoothie</label>
+            <textarea id="smoothie_name" name="smoothie_name" class="materialize-textarea validate" required></textarea>
+            <label for="smoothie_name">Smoothie name</label>
          </div>
       </div>
+      <!-- recipe -->
       <div class="row">
          <div class="input-field col s12">
             <i class="fas fa-align-left prefix light-teal-text text-darken-4 "></i>
-            <textarea id="recipe" name="recipe" class="materialize-textarea validate" required></textarea>
-            <label for="recipe">Recipe</label>
+            <textarea id="recipe_descpription" name="recipe_description" class="materialize-textarea validate"
+               required></textarea>
+            <label for="recipe_description">Recipe description</label>
          </div>
       </div>
-      <div class="row">
-         <div class="input-field col s12">
-            <i class="fas fa-calendar-alt prefix light-leal-text text-darken-4 "></i>
-            <input id="update_recipe" name="update_recipe" type="text" class="datepicker validate" required>
-            <label for="update_recipe">Date</label>
-         </div>
-      </div>
+      <!-- prep time -->
       <div class="row">
          <div class="input-field col s12">
             <i class="fas fa-clock-alt prefix light-leal-text text-darken-4 "></i>
-            <label for="update_recipe">Prep time</label>
+            <label for="pre_time">Prep time</label>
             <input id=" prep_time" type="text" name="prep_time" class="timepicker">
          </div>
       </div>
+      <!-- my favourite option -->
       <div class="row">
          <div class="input-field col s12">
             <div class="switch">
@@ -61,6 +64,14 @@
                      <span class="lever"></span>
                   </label>
             </div>
+         </div>
+      </div>
+      <!-- submit button -->
+      <div class="row">
+         <div class="col s12 center-align">
+            <button type="Submit" class="btn-large light-teal darken-1 text-shadow">
+               <i class="fas fa-paper-plane left">Add Recipe</i>
+            </button>
          </div>
       </div>
    </form>
