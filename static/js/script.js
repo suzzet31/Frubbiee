@@ -8,7 +8,6 @@ $(document).ready(function () {
     $('.tooltipped').tooltip();
     $('select').formSelect();
     $('.timepicker').timepicker({
-        'methodName',
-        paramName
+        'methodName': paramName
     });
 });
