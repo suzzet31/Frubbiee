@@ -4,6 +4,17 @@
 
 .flashes h4 {
     line-height: 2;
+
+}
+
+.text {
+    display: flex;
+    padding: 0 40px;
+    background-color: azure;
+    height: 80;
+    align-item: center;
+    letter-spacing: 3px;
+    color: #0f979b;
 }
 
 .btn-small {
