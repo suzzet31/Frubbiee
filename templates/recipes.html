@@ -12,25 +12,24 @@
                 <a href="{{ url_for('edit_recipes',recipes_id=recipes._id)  }}" class=" btn-small teal lighten">Edit</a>
                 <a href="#" class=" btn-small teal darken-4">Done</a>
             </div>
-        </div>
-        <div class="col s9">
-            <i class=></i>
-            <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.drink_type}}</strong>
-            {% if recipes.my_favourite == "on" %}
-            <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped" data-positiob="right"
-                data-tooltip="My favourite"></i>
-        </div>
-        {% endif%}
+            <div class="col s9">
+                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.smoothie_name}}</strong>
+                {% if recipes.my_favourite == "on" %}
+                <i class="fas fa-exclamation-circle cyan accent-2  text-lighten-2 tooltipped" data-positiob="right"
+                    data-tooltip="My favourite"></i>
+                {% endif%}
+            </div>
         </div>
         <div class="collapsible-body">
-            <strong>{{ recipes.category_name}}</strong>
-            <strong>{{recipes.smoothie_name}}</strong>
-            <p>{{recipes.recipe_description}}</p>
-            <p>{{recipes.prep_time}}</p><br>
+            <strong>Category : {{ recipes.category_name}}</strong><br>
+            <p><strong>Main Ingredient : {{ recipes.main_ingredient}}</strong></p><br>
+            <strong>Name of the Drink: {{recipes.smoothie_name}}</strong><br>
+            <p><strong>Ingredients</strong> :{{recipes.recipe_description}}</p><br>
+            <p><strong>Equipment's needed</strong> :{{recipes.type_of_equipments}}</p><br>
+            <p><strong>Preparation time</strong> : {{recipes.prep_time}}</p><br>
         </div class="col s9">
         <div class="button  btn-lighten-3">
-            <p>{{ recipes.recipe_description}}</p>
-            <p><em>{{ recipes.created_by}}</em></p>
+            <p><strong>Created by: <em>{{ recipes.created_by}}</em></p>
         </div>
     </li>
     {% endfor %}

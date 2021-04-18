@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="light-cyan-text cyan lighten-text-darken-4 center-align">Frubbiee</h3>
+<h3 class="light-cyan-text teal accent-2-text-darken-4 center-align">Frubbiee</h3>
 
 <div class="row card-panel grey lighten-5">
 
@@ -9,11 +9,15 @@
       <!-- category selection -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-folder-open prefix cyan lighten-2-text-darken-4"></i>
+            <i class="fas fa-folder-open prefix  teal accent-2-text-darken-4 "></i>
             <select id="category_name" name="category_name" class="validate" required>
                <option value="" disabled selected>Choose Category</option>
                {% for category in categories %}
+               {% if category.category_name == category.category_name %}
+               <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
+               {% else %}
                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+               {% endif %}
                {% endfor %}
             </select>
             <label for="category_name">Frubbiee category</label>
@@ -22,15 +26,16 @@
       <!-- drink name -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-pen prefix cyan light-teal-text text-darken-4 "></i>
-            <input id="drink_type" name="drink_type" minlenght="5" maxlength="50" type="text" class="validate" required>
-            <label for="drink_type">Drink Type</label>
+            <i class="fas fa-pen prefix teal accent-2-text-darken-4 "></i>
+            <input id="main_ingredient" name="main_ingredient" minlenght="5" maxlength="50" type="text" class="validate"
+               required>
+            <label for="main_ingredient">Drink Type</label>
          </div>
       </div>
       <!-- smoothie name -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-align-left prefix cyan light-teal-text text-darken-4 "></i>
+            <i class="fas fa-align-left prefix teal accent-2-text-darken-4  "></i>
             <textarea id="smoothie_name" name="smoothie_name" class="materialize-textarea validate" required></textarea>
             <label for="smoothie_name">Smoothie name</label>
          </div>
@@ -38,42 +43,50 @@
       <!-- recipe -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-align-left prefix cyan light-teal-text text-darken-4 "></i>
+            <i class="fas fa-align-left prefix teal accent-2-text-darken-4 "></i>
             <textarea id="recipe_descpription" name="recipe_description" class="materialize-textarea validate"
                required></textarea>
             <label for="recipe_description">Recipe description</label>
          </div>
       </div>
-      <!-- prep time -->
+      <!-- type of equipment -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-clock-alt prefix cyan light-leal-text text-darken-4 "></i>
-            <label for="pre_time">Prep time</label>
-            <input id=" prep_time" type="text" name="prep_time" class="timepicker">
+            <i class="fas fa-align-gears prefix  teal lighten-3 "></i>
+            <textarea id="type_of_equipments" name="type_of_equipments" class="materialize-textarea validate"
+               required></textarea>
+            <label for="type_of_equipments">Type of equipments needed</label>
          </div>
-      </div>
-      <!-- my favourite option -->
-      <div class="row">
-         <div class="input-field col s12">
-            <div class="switch">
-               <i class="fas fa-exclamation-circle prefix cyan light-teal-text text-darken-4 "></i>
-               <label for="favourite">
-                  My Favoutite
-                  <label>
-                     <input id=" my_favourite" type="checkbox" name="my_favourite" action="" />
-                     <span class="lever"></span>
-                  </label>
+         <!-- prep time -->
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="fas fa-clock-alt prefix teal-accent-2-text-darken-4 "></i>
+               <label for="pre_time">Prep time</label>
+               <input id=" prep_time" type="text" name="prep_time" class="timepicker">
             </div>
          </div>
-      </div>
-      <!-- submit button -->
-      <div class="row">
-         <div class="col s12 center-align">
-            <button type="Submit" class="btn-large cyan  light-teal-darken-1 text-shadow">
-               <i class="fas fa-paper-plane left">Add Recipe</i>
-            </button>
+         <!-- my favourite option -->
+         <div class="row">
+            <div class="input-field col s12">
+               <div class="switch">
+                  <i class="fas fa-exclamation prefix teal accent-2-text-darken-4  "></i>
+                  <label for="favourite">
+                     My Favoutite
+                     <label>
+                        <input id=" my_favourite" type="checkbox" name="my_favourite" action="" />
+                        <span class="lever"></span>
+                     </label>
+               </div>
+            </div>
          </div>
-      </div>
+         <!-- submit button -->
+         <div class="row">
+            <div class="col s12 center-align">
+               <button type="Submit" class="btn-large cyan  light-teal-darken-1 text-shadow">
+                  <i class="fas fa-paper-plane left">Add Recipe</i>
+               </button>
+            </div>
+         </div>
    </form>
 </div>
 

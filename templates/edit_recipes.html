@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="light-blue-text text-darken-4 center-align">Edit Recipes</h3>
+<h3 class="light-cyan-text text-darken-4 center-align">Edit Recipes</h3>
 
 <div class="row card-panel grey lighten-5">
 
-   <form class="col s12" method="POST" action="{{ url_for('edit_recipes', recipes_id=recipes._id) }}">
+   <form class="col s12 cyan accent-2" method="POST" action="{{ url_for('edit_recipes', recipes_id=recipes._id) }}">
       <!-- category selection -->
       <div class="row">
          <div class="input-field col s12">
@@ -22,9 +22,9 @@
       <!-- drink name -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-pen prefix light-leal-text text-darken-4 "></i>
-            <input id="drink_type" name="drink_type" minlenght="5" maxlength="50" type="text" class="validate" required>
-            <label for="drink_type">Drink Type</label>
+            <i class="fas fa-pen prefix light-teal-text text-darken-4 "></i>
+            <input id="" name="main_ingredient" minlenght="5" maxlength="50" type="text" class="validate" required>
+            <label for="main_ingredient">Drink Type</label>
          </div>
       </div>
       <!-- smoothie name -->
@@ -42,6 +42,15 @@
             <textarea id="recipe_descpription" name="recipe_description" class="materialize-textarea validate"
                required></textarea>
             <label for="recipe_description">Recipe description</label>
+         </div>
+      </div>
+      <!-- type of equipment -->
+      <div class="row">
+         <div class="input-field col s12">
+            <i class="fas fa-align-gears prefix light-teal-text text-darken-4 "></i>
+            <textarea id="type_of_equipments" name="type_of_equipments" class="materialize-textarea validate"
+               required></textarea>
+            <label for="type_of_equipments">Type of equipments needed</label>
          </div>
       </div>
       <!-- prep time -->

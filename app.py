@@ -114,9 +114,10 @@ def add_recipes():
         my_favourite = "on" if request.form.get("my_favourite") else "off"
         recipes = {
             "category_name": request.form.get("category_name"),
-            "drink_type": request.form.get("drink_type"),
+            "main_ingredient": request.form.get("main_ingredient"),
             "smoothie_name": request.form.get("smoothie_name"),
-            "recipe_description": request.form.get("recipe_description"),
+            "recipe_description": request.form.getlist("recipe_description"),
+            "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
             "my_favourite": my_favourite,
             "created_by": session["user"]
