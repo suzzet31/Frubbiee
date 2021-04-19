@@ -138,13 +138,13 @@ def edit_recipes(recipes_id):
             "category_name": request.form.get("category_name"),
             "main_ingredient": request.form.get("main_ingredient"),
             "smoothie_name": request.form.get("smoothie_name"),
-            "recipe_description": request.form.getlist("recipe_description"),
+            "recipe_description": request.form.get("recipe_description"),
             "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
             "my_favourite": my_favourite,
             "created_by": session["user"]
         }
-        mongo.db.recipes.update({"_id": ObjectId(recipes_id)},submit)
+        mongo.db.recipes.update({"_id": ObjectId(recipes_id)}, submit)
         flash("Drink Successfully updated")
         
     recipes = mongo.db.recipes.find_one({"_id": ObjectId(recipes_id)})

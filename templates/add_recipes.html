@@ -3,15 +3,15 @@
 
 <h3 class="light-cyan-text  teal lighten-1 accent-2-text-darken-4 center-align">Frubbiee</h3>
 
-<div class="row card-panel grey lighten-5">
 
+<div class=" col card-panel grey lighten-5">
    <form class="col s12 cyan lighten-5" method="POST" action="{{ url_for('add_recipes') }}">
       <!-- category selection -->
       <div class="row">
          <div class="input-field col s12">
-            <i class="fas fa-folder-open prefix   teal lighten-4 text-darken-4 "></i>
+            <i class="fas fa-folder-open prefix teal lighten-4 text-darken-4 "></i>
             <select id="category_name" name="category_name" class="validate" required>
-               <option value="" disabled selected>Choose Category</option>
+               <option value="" disabled>Choose Category</option>
                {% for category in categories %}
                {% if category.category_name == category.category_name %}
                <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>

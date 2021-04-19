@@ -3,9 +3,9 @@
 
 <h3 class="light-blue-text text-darken-4 center-align">Frubbiee drinks recipes</h3>
 
-<ul class="collapsible cyan lighten-5">
+<ul class="collapsible">
     {% for recipes in recipes %}
-    <ul class="collasible">
+    <li>
         <div class="collapsible-header black-text .text-shadow teal lighten-3 lighten-3">
             <div class="col s3">
                 <i class="fas fa-caret-down"></i>
@@ -16,27 +16,24 @@
                 {% endif %}
             </div>
             <div class="col s9">
-                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.smoothie_name}}</strong>
+                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
                 {% if recipes.my_favourite == "on" %}
                 <i class="fas fa-exclamation-circle cyan accent-2  text-lighten-2 tooltipped" data-positiob="right"
                     data-tooltip="My favourite"></i>
+
                 {% endif%}
             </div>
-            <div class="collapsible-body">
-                <strong>Category : {{ recipes.category_name}}</strong><br>
-                <p><strong>Main Ingredient : {{ recipes.main_ingredient}}</strong></p><br>
-                <strong>Name of the Drink: {{recipes.smoothie_name}}</strong><br>
-                <p><strong>Ingredients</strong> :{{recipes.recipe_description}}</p><br>
-                <p><strong>Equipment's needed</strong> :{{recipes.type_of_equipments}}</p><br>
-                <p><strong>Preparation time</strong> : {{recipes.prep_time}}</p><br>
-            </div class="col s9">
-            <div class="button  btn-lighten-3">
-                <p>Created by:{{- recipes.created_by -}}</p>
-            </div>
         </div>
+        <div class="collapsible-body">
+            <p><strong>{{ recipes.main_ingredient}}</strong></p><br>
+            <strong> {{recipes.smoothie_name}}</strong><br>
+            <p><strong>Ingredients:{{recipes.recipe_description}}</strong></p><br>
+            <p><strong> recipes.type_of_equipments}}</strong> </p><br>
+            <p><strong> {{recipes.prep_time}}</strong> </p><br>
+            <p>{{recipes.created_by}}</p>
         </div>
-        </li>
-        {% endfor %}
-    </ul>
+    </li>
+    {% endfor %}
+</ul>
 
-    {% endblock %}
+{% endblock %}

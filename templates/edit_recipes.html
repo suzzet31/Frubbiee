@@ -4,14 +4,13 @@
 <h3 class="light-black-text text-darken-4 center-align">Edit Recipes</h3>
 
 <div class="row card-panel grey lighten-4">
-
    <form class="col s12 cyan lighten-5" method="POST" action="{{ url_for('edit_recipes', recipes_id=recipes._id) }}">
       <!-- category selection -->
       <div class="row">
          <div class="input-field col s12">
             <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
             <select id="category_name" name="category_name" class="validate" required>
-               <option value="" disabled selected>Choose Category</option>
+               <option value="" disabled>Choose Category</option>
                {% for category in categories %}
                {% if category.category_name == recipes.category_name %}
                <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
