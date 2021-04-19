@@ -26,17 +26,6 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("/posts")
-def posts():
-    posts = list(mongo.db.posts.find())
-    return render_template("posts.html", posts=posts)
-
-
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -69,7 +58,6 @@ def login():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
-
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
@@ -92,6 +80,8 @@ def login():
     return render_template("login.html")
 
 
+
+
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
@@ -106,6 +96,14 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+@app.route("/posts" , methods=["GET","POST"])
+def posts():
+    if request.method == "POST":
+        flash("Your recipe is been posted")
+        session.pop(session["user"])
+    return render_template("posts.html")
+
 
 
 @app.route("/add_recipes", methods=["GET","POST"])
@@ -153,10 +151,11 @@ def edit_recipes(recipes_id):
 
 
 @app.route("/delete_recipes/<recipes_id>")
-def delete_recipes(task_id):
+def delete_recipes(recipes_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipes_id)})
     flash("Recipes Successfully Deleted")
     return redirect(url_for("get_recipes"))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

@@ -2,13 +2,39 @@
 {% block content %}
 
 <title>Frubbie Drinks</title>
-<div class="collapsible-body">
-
+<div>
+    <h3 class="light-black-text text-darken-4 center-align">Post Frubbie Drinks</h3>
+    <div class="row card-panel grey lighten-4">
+        <form class="col s12 cyan lighten-5" method="POST" action="{{ url_for('posts') }}">
+            <!-- category selection -->
+            <div class="row">
+                <div class="card s12 ">
+                    <div class="card">
+                        <div class="card-image">
+                            <image src="{{url_for('static',filename='images/juice.png')}}">
+                                <span class="card-title">Card Title</span>
+                                <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                        class="fas fa-add-circle">Add</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="col s12 cyan lighten-5" method="POST" action="{{ url_for('posts') }}">
+            <!-- category selection -->
+            <div class="row">
+                <div class="card s12 ">
+                    <div class="card">
+                        <div class="card-image">
+                            <image src="{{url_for('static',filename='images/juice.png')}}">
+                                <span class="card-title">Card Title</span>
+                                <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                        class="fas fa-add-circle">Add</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-
-</div>
-
-<body>
-
-</body>
 {% endblock %}
