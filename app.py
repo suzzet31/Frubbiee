@@ -1,7 +1,7 @@
 import os
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, send_from_directory)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -20,10 +20,52 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+def index():
+    index = list(mongo.db.index.find())
+    return render_template("index.html", index=index)
+
+
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
     return render_template("recipes.html", recipes=recipes)
+
+
+@app.route("/about")
+def about():
+    data = []
+    with open("data/fruibbiee/,json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", activo=data)
+
+
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {}
+    with open("data/fruibbiee.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+    return render_template("member.html", member=member)
+
+
+@app.route("/Frubbiee")
+def frubbiee():
+    return render_template("frubbiee.html", page_title="Frubbiee")
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
+    return render_template("contact.html", page_title="Contact")
+
+
+@ app.route("/member")
+def member():
+    return render_template("member.html", page_title="member")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -80,8 +122,6 @@ def login():
     return render_template("login.html")
 
 
-
-
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
@@ -97,12 +137,14 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
+
 @app.route("/posts" , methods=["GET","POST"])
 def posts():
     if request.method == "POST":
         flash("Your recipe is been posted")
         session.pop(session["user"])
     return render_template("posts.html")
+
 
 
 

@@ -7,6 +7,7 @@ $(document).ready(function () {
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     $('select').formSelect();
+    $('.materialboxed').materialbox();
     $('.timepicker').timepicker({
         'methodName': paramName
     });

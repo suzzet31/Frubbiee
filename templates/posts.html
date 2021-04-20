@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+
 <title>Frubbie Drinks</title>
-<div>
+
+<images scr=" {{url_for('posts')}}">
     <h3 class="light-black-text text-darken-4 center-align">Post Frubbie Drinks</h3>
     <div class="row card-panel grey lighten-4">
         <form class="col s12 cyan lighten-5" method="POST" action="{{ url_for('posts') }}">
@@ -36,5 +38,45 @@
             </div>
         </form>
     </div>
-</div>
-{% endblock %}
+    </div>
+    <div class="containter-fluid">
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <image src="{{url_for('static',filename='images/juice.png')}}">
+                    <span class="title">Title</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="fas fa-circle">grade</i></a>
+            </li>
+            <li class="collection-item avatar">
+                <image src="{{url_for('static',filename='images/cherry.jpg')}}">
+                    <i class="fas fa-circle">folder</i>
+                    <span class="title">Title</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="fas fa-circle">grade</i></a>
+            </li>
+            <li class="collection-item avatar">
+                <image src="{{url_for('static',filename='images/smoothie.jpg')}}">
+                    <i class="fas fa-circle">insert_chart</i>
+                    <span class="title">Title</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="fas fa-circle">grade</i></a>
+            </li>
+            <li class="collection-item avatar">
+                <image src="{{url_for('static',filename='images/cherry.jpg')}}">
+                    <i class="fas fa-circle">play_arrow</i>
+                    <span class="title">Title</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="fas fa-circle">grade</i></a>
+            </li>
+        </ul>
+    </div>
+
+    {% endblock %}
