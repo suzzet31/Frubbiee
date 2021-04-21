@@ -31,43 +31,6 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("/about")
-def about():
-    data = []
-    with open("data/fruibbiee/,json", "r") as json_data:
-        data = json.load(json_data)
-    return render_template("about.html", page_title="About", activo=data)
-
-
-@app.route("/about/<member_name>")
-def about_member(member_name):
-    member = {}
-    with open("data/fruibbiee.json", "r") as json_data:
-        data = json.load(json_data)
-        for obj in data:
-            if obj["url"] == member_name:
-                member = obj
-    return render_template("member.html", member=member)
-
-
-@app.route("/Frubbiee")
-def frubbiee():
-    return render_template("frubbiee.html", page_title="Frubbiee")
-
-
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    if request.method == "POST":
-        flash("Thanks {}, we have received your message!".format(
-            request.form.get("name")))
-    return render_template("contact.html", page_title="Contact")
-
-
-@ app.route("/member")
-def member():
-    return render_template("member.html", page_title="member")
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -130,23 +93,6 @@ def profile(username):
     return render_template("profile.html", username=username)
 
 
-@app.route("/logout")
-def logout():
-    # remove user from session cookie
-    flash("You have been logged out")
-    session.pop("user")
-    return redirect(url_for("login"))
-
-
-@app.route("/posts" , methods=["GET","POST"])
-def posts():
-    if request.method == "POST":
-        flash("Your recipe is been posted")
-        session.pop(session["user"])
-    return render_template("posts.html")
-
-
-
 
 @app.route("/add_recipes", methods=["GET","POST"])
 def add_recipes():
@@ -189,7 +135,60 @@ def edit_recipes(recipes_id):
         
     recipes = mongo.db.recipes.find_one({"_id": ObjectId(recipes_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_recipes.html", recipes=recipes, categories=categories)
+    return render_template("edit_recipes.html", recipes=recipes, categories=categories )
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
+@app.route("/about")
+def about():
+    data = []
+    with open("data/fruibbiee/,json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", activo=data)
+
+
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {}
+    with open("data/fruibbiee.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+    return render_template("member.html", member=member)
+
+
+@app.route("/Frubbiee")
+def frubbiee():
+    return render_template("frubbiee.html", page_title="Frubbiee")
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
+    return render_template("contact.html", page_title="Contact")
+
+
+@ app.route("/member")
+def member():
+    return render_template("member.html", page_title="member")
+
+
+@app.route("/posts" , methods=["GET","POST"])
+def posts():
+    if request.method == "POST":
+        flash("Your recipe is been posted")
+        session.pop(session["user"])
+    return render_template("posts.html")
 
 
 @app.route("/delete_recipes/<recipes_id>")
@@ -197,6 +196,7 @@ def delete_recipes(recipes_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipes_id)})
     flash("Recipes Successfully Deleted")
     return redirect(url_for("get_recipes"))
+
 
 
 if __name__ == "__main__":
