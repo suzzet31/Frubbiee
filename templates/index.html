@@ -1,78 +1,84 @@
 {% extends "base.html" %}
 {% block content %}
 
-<header class="masthead"
-    style="background-image: url('https://br.paipee.com/wp-content/uploads/2019/10/istockphoto-588610682-170667a.jpg')">
-</header>
-<h2 class="light-teal text-darken-4 center-align left"><strong>Frubbiee</strong></h2>
+<h2>{{page_title}}</h2>
 
-<div class="container">
+<subheading>
 
-    <body class="col12 s12 cyan lighten-5" method="POST" action="{{ url_for('index') }}">
-        <div class></div>
-        <div>
-            <div class="box">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="site-heading">
-                        <span class="subheading">fresh taste</span>
-                        <h5 class="light-teal text-darken-4 center-align left"><strong>Fresh juicy and smoothie
-                                drinks</strong></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section-column col12">
+    {{FRUBBIEE}}
 
+    {{ slides }}
+    <subheading>
 
-            <!-- Tap Target Structure -->
+        <div class="row masterhead">
+            <p>
 
-        </div>
-    </body>
+                <body action="{{ url_for('index') }}"></body>
 
-    <!-- Main Content -->
-    <!-- Footer -->
-    <footer class="container">
-        <div class="col12">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                <h2 class="light-teal text-darken-4 center-align left"><strong>Frubbiee</strong></h2>
+
+                <div class="slider">
+
+                    <ul class="slides">
+                        <li>
+                            <img src="https://lorempixel.com/580/250/nature/1"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                        <li>
+                            <img src="https://lorempixel.com/580/250/nature/2"> <!-- random image -->
+                            <div class="caption left-align">
+                                <h3>Left Aligned Caption</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
+                        <li>
+                            <img src="https://lorempixel.com/580/250/nature/3"> <!-- random image -->
+                            <div class="caption right-align">
+                                <h3>Right Aligned Caption</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
                         </li>
+                        <li>
+                            <img src="https://lorempixel.com/580/250/nature/4"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website <span id="copyright"></span></p>
-                    <p class="copyright text-muted">Fruibbiee &copy; Juices & Smothies</p>
                 </div>
-            </div>
-        </div>
-    </footer>
+                <div>
+                    {{ field }}
+                    <h4>Types of Smoothies</h4>
 
-    <!-- Bootstrap core JavaScript -->
+                </div>
 
-    <script>
-        $("#copyright").text(new Date().getFullYear());
-    </script>
 
-    </container>
-    {% endblock %}
+
+
+                {{ template}}
+                <div class="post-preview">
+                    <a href="post.html">
+
+                        <h2 class="post-title">
+                            Antitoxic Smoothies
+                        </h2>
+
+                        <h3 class="post-subtitle">
+                            Craving for something more, these healthy drinks will give you a boost of nutrition.
+                        </h3>
+                    </a>
+                    <div class="col-md-7 s12">
+                        <img width="650" src="static/img/juice.png">
+                    </div>
+                    <p class="post-meta">Start your day refreshed with a drink of fresh juices and smoothies. .
+                        <a href="#">Fribbiee drinks</a>
+                        fresh & tasty, 2021</p>
+                </div>
+                <hr>
+
+                {% endblock %}

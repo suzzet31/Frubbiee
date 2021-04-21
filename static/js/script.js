@@ -17,7 +17,7 @@ $(document).ready(function () {
 $('.timepicker').timepicker({
     'methodName': paramName
 });
-
+$('.slider').slider();
 validateMaterializeSelect();
 
 function validateMaterializeSelect() {

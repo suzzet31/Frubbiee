@@ -10,37 +10,39 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    {% block styles %}
-    {% endblock %}
+
     <title>Frubbie Drinks</title>
 
 </head>
 <header>
     <!-- main top bar -->
-    <nav class="nav-extended   cyan lighten-5 lighten-4 text-darken-4 darken-4">
-        <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Frubbiee</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="{{url_for('index') }}">Home</a></li>
-                <li><a href="{{url_for('get_recipes') }}">Recipe</a></li>
-                {% if session.user %}
-                <li><a href="{{url_for('profile',username=session['user']) }}">Profile</a></li>
-                <li><a href="#">Frubbiee</a></li>
-                <li><a href="{{url_for('add_recipes') }}">New Recipes</a></li>
-                <li><a href="{{url_for('logout') }}">Log out</a></li>
-                {% else %}
-                <li><a href="{{url_for('login') }}">Log in</a></li>
-                <li><a href="{{url_for('posts', ) }}">Post</a></li>
-                <li><a href="{{url_for('register') }}">Register</a></li>
-                <li><a href="{{url_for('contact') }}">contact</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+    <ul class="navbar">
+        <nav class=" collapsible nav-extended   cyan lighten-5 lighten-4 text-darken-4 darken-4">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">Frubbiee</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{url_for('index') }}">Home</a></li>
+                    <li><a href="{{url_for('get_recipes') }}">Recipe</a></li>
+                    {% if session.user %}
+                    <li><a href="{{url_for('profile',username=session['user']) }}">Profile</a></li>
+                    <li><a href="#">Frubbiee</a></li>
+                    <li><a href="{{url_for('add_recipes') }}">New Recipes</a></li>
+                    <li><a href="{{url_for('logout') }}">Log out</a></li>
+                    {% else %}
+                    <li><a href="{{url_for('login') }}">Log in</a></li>
+                    <li><a href="{{url_for('posts', ) }}">Post</a></li>
+                    <li><a href="{{url_for('register') }}">Register</a></li>
+                    <li><a href="{{url_for('contact') }}">contact</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </ul>
     <!-- mobile sidenav -->
-    <ul class="sidenav" id="mobile-demo">
+    <ul class="sidenav collapsible " id="mobile-demo">
         <li>
             <h4 class="center-align cyan lighten-5 darken-4 text-darken-4 ">Frubbiee Drinks</h4>
         </li>

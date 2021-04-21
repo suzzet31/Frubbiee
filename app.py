@@ -4,12 +4,13 @@ from flask import (
     redirect, request, session, url_for, send_from_directory)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from jinja2 import Template
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
 
-app = Flask(__name__)
+app = Flask(__name__ , static_folder='bootstrap.min.css')
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
@@ -22,7 +23,7 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
     index = list(mongo.db.index.find())
-    return render_template("index.html", index=index)
+    return render_template("index.html", index=index )
 
 
 @app.route("/get_recipes")
@@ -30,6 +31,76 @@ def get_recipes():
     recipes = list(mongo.db.recipes.find())
     return render_template("recipes.html", recipes=recipes)
 
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
+@app.route("/about")
+def about():
+    data = []
+    with open("data/fruibbiee/,json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", Frubbiee=data)
+
+
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {}
+    with open("data/fruibbiee.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+
+    return render_template("member.html", member=member)
+
+
+@app.route("/Frubbiee")
+def frubbiee():
+    return render_template("frubbiee.html", page_title="Frubbiee")
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
+    return render_template("contact.html", page_title="Contact")
+
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    session['username'] = request.form['username']
+    return redirect(url_for('register'))
+
+
+@ app.route("/member")
+def member():
+    session['username'] = request.form['username']
+    session['message']=request.form['message']
+    return redirect(url_for('message'))
+
+@app.route("/message")
+def message():
+    return render_template("register.html")
+
+    return render_template("member.html", page_title="member")
+
+
+@app.route("/posts", methods=["GET","POST"])
+def posts():
+    if request.method == "POST":
+        flash("Your recipe is been posted")
+        session.pop(session["user"])
+    return render_template("posts.html")
+   
+   
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -102,7 +173,7 @@ def add_recipes():
             "category_name": request.form.get("category_name"),
             "main_ingredient": request.form.get("main_ingredient"),
             "smoothie_name": request.form.get("smoothie_name"),
-            "recipe_description": request.form.getlist("recipe_description"),
+            "recipe_description": request.form.get("recipe_description"),
             "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
             "my_favourite": my_favourite,
@@ -116,6 +187,7 @@ def add_recipes():
     return render_template("add_recipes.html", categories=categories)
 
 
+
 @app.route("/edit_recipes/<recipes_id>", methods=["GET","POST"])
 def edit_recipes(recipes_id):
     if request.method == "POST":
@@ -127,68 +199,15 @@ def edit_recipes(recipes_id):
             "recipe_description": request.form.get("recipe_description"),
             "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
-            "my_favourite": my_favourite,
-            "created_by": session["user"]
-        }
+            "my_favourite": my_favourite  
+         }
         mongo.db.recipes.update({"_id": ObjectId(recipes_id)}, submit)
         flash("Drink Successfully updated")
         
     recipes = mongo.db.recipes.find_one({"_id": ObjectId(recipes_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_recipes.html", recipes=recipes, categories=categories )
+    return render_template("edit_recipes.html", recipes=recipes, categories=categories)
 
-
-@app.route("/logout")
-def logout():
-    # remove user from session cookie
-    flash("You have been logged out")
-    session.pop("user")
-    return redirect(url_for("login"))
-
-
-@app.route("/about")
-def about():
-    data = []
-    with open("data/fruibbiee/,json", "r") as json_data:
-        data = json.load(json_data)
-    return render_template("about.html", page_title="About", activo=data)
-
-
-@app.route("/about/<member_name>")
-def about_member(member_name):
-    member = {}
-    with open("data/fruibbiee.json", "r") as json_data:
-        data = json.load(json_data)
-        for obj in data:
-            if obj["url"] == member_name:
-                member = obj
-    return render_template("member.html", member=member)
-
-
-@app.route("/Frubbiee")
-def frubbiee():
-    return render_template("frubbiee.html", page_title="Frubbiee")
-
-
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    if request.method == "POST":
-        flash("Thanks {}, we have received your message!".format(
-            request.form.get("name")))
-    return render_template("contact.html", page_title="Contact")
-
-
-@ app.route("/member")
-def member():
-    return render_template("member.html", page_title="member")
-
-
-@app.route("/posts" , methods=["GET","POST"])
-def posts():
-    if request.method == "POST":
-        flash("Your recipe is been posted")
-        session.pop(session["user"])
-    return render_template("posts.html")
 
 
 @app.route("/delete_recipes/<recipes_id>")
@@ -196,6 +215,9 @@ def delete_recipes(recipes_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipes_id)})
     flash("Recipes Successfully Deleted")
     return redirect(url_for("get_recipes"))
+
+
+# style (Static files (CSS, JavaScript, Images))
 
 
 

@@ -38,32 +38,7 @@ body {}
 }
 
 .collapsible-header .col strong {
-    margin: 5px;
-    line-height: 42px;
-}
-
-.masthead {
-    margin-bottom: 50px;
-    background: no-repeat center center;
-    background-color: #868e96 !important;
-    background-attachment: scroll;
-    position: relative;
-    background-size: cover;
-}
-
-.masthead .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #212529;
-    opacity: 0.5;
-}
-
-.masthead .page-heading,
-.masthead .post-heading,
-.masthead .site-heading {
-    padding: 200px 0 150px;
-    color: white;
+    margin: 15px;
+    margin-top: 15px;
+    margin-bottom: 25px line-height: 42px;
 }
