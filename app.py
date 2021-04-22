@@ -11,10 +11,12 @@ if os.path.exists("env.py"):
     import env
 
 
-app = Flask(__name__ , static_folder='bootstrap.min.css')
+app = Flask(__name__)
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 
 client = MongoClient('mongodb://localhost/')
-
 
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
@@ -56,17 +58,6 @@ def search_recipe(search_word):
             count += 1
         message += '\n\n'
     return message
-
-
-@app.route('/posts', methods=['POST'])
-def reply_with_recipe_info():
-    food_name = request.values.get('Body')
-    print('Message sent', recipes_name)
-    recipes = search_recipe(recipes_name)
-    message = convert_result_to_message(recipes)
-    response = MessagingResponse()
-    response.message(message)
-    return str(response)
 
 
 
@@ -236,19 +227,7 @@ def delete_recipes(recipes_id):
     return redirect(url_for("get_recipes"))
 
 
-@app.route("/upload_image")
-def upload_image:
-    if request.method == "POST":
-    image = request.files['myfile'] #myfile is name of input tag
-    config ={
-            'album':album,
-            'name':'image',
-            'title':Image'
-    }
-    print "uploading image..."
-    filename = secure_filename(image.filename)
-    file.save(os.path.join('static/images', filename))
-    print os.path.realpath(image.filename)
+
 
 # style (Static files (CSS, JavaScript, Images))
 

@@ -38,7 +38,34 @@ body {}
 }
 
 .collapsible-header .col strong {
-    margin: 15px;
+    margin: 10px;
     margin-top: 15px;
-    margin-bottom: 25px line-height: 42px;
+    margin-bottom: 15px line-height: 32px;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
 }
