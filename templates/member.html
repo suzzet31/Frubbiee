@@ -2,7 +2,7 @@
 {% block content %}
 <h2>{{page_title}}</h2>
 
-
+<div class="col s12 cyan lighten-5" method="POST" action="{{url_for('login',username=session['member']) }}"></div>
 <div class="row">
     <div class="col-md-5">
         <img src="{{ member.image_source }}" alt="Profile image for {{ member.name }}">

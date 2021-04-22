@@ -1,9 +1,7 @@
 // materialize sidebar 
 
 $(document).ready(function () {
-    $('.sidenav').sidenav({
-        edge: "right"
-    });
+    $('.sidenav').sidenav();
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     $('select').formSelect();

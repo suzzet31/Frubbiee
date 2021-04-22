@@ -5,12 +5,17 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from jinja2 import Template
+from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
 
 app = Flask(__name__ , static_folder='bootstrap.min.css')
+
+client = MongoClient('mongodb://localhost/')
+
+
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
@@ -32,6 +37,38 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
+def search_recipe(search_word):
+    cursor = recipes.find({'$text': {'$search': search_word}})
+    result = []
+    for data in cursor:
+        result.append(data)
+    return result
+    def convert_result_to_message(result):
+        if len(result) == 0:
+            return "Sorry, we currently don't have any recipe pertaining to your smoothie."
+    message = ""
+    for data in result:
+        message += f"Food: {data['name']}\n"
+        message += "Steps\n"
+        count = 1
+        for step in data['steps']:
+            message += f"{count}. {step}\n"
+            count += 1
+        message += '\n\n'
+    return message
+
+
+@app.route('/posts', methods=['POST'])
+def reply_with_recipe_info():
+    food_name = request.values.get('Body')
+    print('Message sent', recipes_name)
+    recipes = search_recipe(recipes_name)
+    message = convert_result_to_message(recipes)
+    response = MessagingResponse()
+    response.message(message)
+    return str(response)
+
+
 
 @app.route("/logout")
 def logout():
@@ -41,29 +78,29 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/about")
-def about():
-    data = []
-    with open("data/fruibbiee/,json", "r") as json_data:
-        data = json.load(json_data)
-    return render_template("about.html", page_title="About", Frubbiee=data)
+@app.route("/member/<username>", methods=["GET", "POST"])
+def member(username):
+    if request.method == "POST":
+          existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+            
+    if existing_user:
+        flash("Username already exists")
+        return redirect(url_for("register"))
 
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
 
-@app.route("/about/<member_name>")
-def about_member(member_name):
-    member = {}
-    with open("data/fruibbiee.json", "r") as json_data:
-        data = json.load(json_data)
-        for obj in data:
-            if obj["url"] == member_name:
-                member = obj
+        # put the new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Successful!")
+        return redirect(url_for("profile", username=session["user"]))
 
-    return render_template("member.html", member=member)
+    return render_template("register.html")
 
-
-@app.route("/Frubbiee")
-def frubbiee():
-    return render_template("frubbiee.html", page_title="Frubbiee")
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -74,31 +111,14 @@ def contact():
     return render_template("contact.html", page_title="Contact")
 
 
-@app.route('/signup', methods=['POST'])
-def signup():
-    session['username'] = request.form['username']
-    return redirect(url_for('register'))
 
 
-@ app.route("/member")
-def member():
-    session['username'] = request.form['username']
-    session['message']=request.form['message']
-    return redirect(url_for('message'))
-
-@app.route("/message")
-def message():
-    return render_template("register.html")
-
-    return render_template("member.html", page_title="member")
-
-
-@app.route("/posts", methods=["GET","POST"])
+@app.route("/posts", methods=["POST"])
 def posts():
-    if request.method == "POST":
-        flash("Your recipe is been posted")
-        session.pop(session["user"])
-    return render_template("posts.html")
+        if request.method == "POST":
+           flash("Your recipe is been posted")
+           session.pop(session["user"])
+           return render_template("posts.html")
    
    
 
@@ -177,7 +197,6 @@ def add_recipes():
             "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
             "my_favourite": my_favourite,
-            "created_by": session["user"]
         }
         mongo.db.recipes.insert_one(recipes)
         flash("Drink Successfully Added")
@@ -216,6 +235,20 @@ def delete_recipes(recipes_id):
     flash("Recipes Successfully Deleted")
     return redirect(url_for("get_recipes"))
 
+
+@app.route("/upload_image")
+def upload_image:
+    if request.method == "POST":
+    image = request.files['myfile'] #myfile is name of input tag
+    config ={
+            'album':album,
+            'name':'image',
+            'title':Image'
+    }
+    print "uploading image..."
+    filename = secure_filename(image.filename)
+    file.save(os.path.join('static/images', filename))
+    print os.path.realpath(image.filename)
 
 # style (Static files (CSS, JavaScript, Images))
 
