@@ -1,4 +1,14 @@
-body {}
+* {
+    box-sizing: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    text-decoration-style: Lato, sans-serif;
+    -webkit-text-size-adjust: auto;
+    text: #bbb;
+}
 
 .col-md-5 img {
     width: 100%
@@ -13,6 +23,11 @@ body {}
 
 }
 
+container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
 .image {
     size: 2600px;
 }
@@ -20,7 +35,7 @@ body {}
 .text {
     display: flex !important;
     padding: 0 40px;
-    background-color: azure;
+    background-color: rgb(51, 100, 100);
     height: 80;
     align-item: center;
     letter-spacing: 3px;
@@ -43,11 +58,6 @@ body {}
     margin-bottom: 15px line-height: 32px;
 }
 
-th,
-td {
-    padding: 15px;
-    text-align: left;
-}
 
 div.gallery {
     margin: 5px;
@@ -68,4 +78,77 @@ div.gallery img {
 div.desc {
     padding: 15px;
     text-align: center;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+#gradient {
+    background-image: linear-gradient(to bottom right, red, yellow);
+}
+
+body {
+    font-size: 20px;
+    color: #212529;
+    font-family: 'Lora', 'Times New Roman', serif;
+}
+
+p {
+    line-height: 1.5;
+    margin: 30px 0;
+}
+
+p a {
+    text-decoration: underline;
+}
+
+form .form-group:first-child .floating-label-form-group {
+    border-top: 1px solid #dee2e6;
+}
+
+footer {
+    padding: 50px 0 65px;
+}
+
+footer .list-inline {
+    margin: 0;
+    padding: 0;
+}
+
+footer .copyright {
+    font-size: 14px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 800;
+    padding: 15px 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 0;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.btn-primary {
+    background-color: #0085A1;
+    border-color: #0085A1;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    color: #fff;
+    background-color: #00657b !important;
+    border-color: #00657b !important;
+}
+
+.btn-lg {
+    font-size: 16px;
+    padding: 25px 35px;
 }

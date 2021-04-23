@@ -8,7 +8,7 @@
    <fieldset class="col s12 cyan lighten-5" method="POST" action="{{ url_for('add_recipes') }}">
       <!-- category selection -->
       <div class="row">
-         <div class="input-field col s12">
+         <div class=" input-field col s12">
             <i class="fas fa-folder-open prefix teal lighten-4 text-darken-4 "></i>
             <select id="category_name" name="category_name" class="validate" required>
                <option value="" disabled selected>Choose Category</option>
@@ -16,7 +16,7 @@
                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                {% endfor %}
             </select>
-            <label for="category_name">Frubbiee category</label>
+            <label for="category_name">Frubbiee drink recipe</label>
          </div>
       </div>
       <!-- drink name -->
@@ -25,7 +25,7 @@
             <i class="fas fa-pen prefix  lighten-4 text-darken-4 "></i>
             <input id="main_ingredient" name="main_ingredient" minlenght="5" maxlength="50" type="text" class="validate"
                required>
-            <label for="main_ingredient">Drink Type</label>
+            <label for="main_ingredient">Type of drink</label>
          </div>
       </div>
       <!-- smoothie name -->
@@ -33,7 +33,7 @@
          <div class="input-field col s12">
             <i class="fas fa-align-left prefix  lighten-4 text-darken-4  "></i>
             <textarea id="smoothie_name" name="smoothie_name" class="materialize-textarea validate" required></textarea>
-            <label for="smoothie_name">Smoothie name</label>
+            <label for="smoothie_name">Name of smoothie</label>
          </div>
       </div>
       <!-- recipe -->
