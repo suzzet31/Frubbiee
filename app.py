@@ -198,7 +198,20 @@ def add_categories():
 
  return render_template("add_categories.html")
 
- 
+
+@app.route("/edit_category/<category_id>", methods=["GET", "POST"])
+def edit_categories(category_id):
+    if request.method == "POST"
+       submit = {
+           "category_name": request.form.get("category_name")
+           }
+           mongo.db.recipes.remove({"_id": ObjectId(recipes_id)})
+           flash("Category  Successfully Updated")
+           return redirect(url_for("get_categories"))
+        
+        category = mongo.db.categories.find_one("_id":objectId(category_id))}
+        return render_template("edit_categories.html",  category=category)
+
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
