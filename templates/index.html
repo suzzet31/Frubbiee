@@ -7,18 +7,14 @@
 
 </head>
 
-<body class="container-fluid scrollspy">
-    <div class="navbar-fixed">
-        <nav class="teal scrollspy autocomplete responsive">
-
-            <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST"
-                action="{{ url_for('index') }}">
+<body class="container-fluid">
+    <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('index') }}">
 </body>
 <div class="row">
     <div class="col s12 m12 offset-m2">
         <div class="card-panel">
-            <h3 class="center-align light-blue-text text-darken-4">
-                {{ username }}'s Profile
+            <h3 class="center-align light-cyan-text text-darken-4"><a href="{{ url_for('index') }}"> Frubbiee drinks</a>
+
             </h3>
         </div>
 
@@ -27,8 +23,8 @@
                 <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                     class="card-img-top" alt="...">
                 <div class=" text-center">
-                    <h5 class="card-title mb-0">Team Member</h5>
-                    <div class="card-text text-black-50">Web Developer</div>
+                    <h5 class="card-title mb-0">A Treat</h5>
+                    <div class="card-text text-black-50">Icecream and Mashmallow Smoothie</div>
                 </div>
             </div>
         </div>
@@ -38,8 +34,8 @@
                 <img src="https://images.unsplash.com/photo-1596392301391-e8622b210bd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
                     class="card-img-top" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title mb-0">Team Member</h5>
-                    <div class="card-text text-black-50">Web Developer</div>
+                    <h5 class="card-title mb-0">Detox smoothie</h5>
+                    <div class="card-text text-black-50">Pineapple detox smoothie</div>
                 </div>
             </div>
         </div>

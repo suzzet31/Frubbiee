@@ -25,3 +25,18 @@ input {
 div~p {
     background-color: rgb(147, 147, 101);
 }
+
+.toggle {
+    display: -ms-flexbox -moz-box -moz-inline-flex -webkit-flex;
+}
+
+.background-image {
+    background: url("static/images/juice.jpg");
+    background-size: cover;
+    font-family: Roboto;
+    background-position: auto;
+}
+
+ul li :hover ul li {
+    display: block;
+}

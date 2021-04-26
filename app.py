@@ -186,36 +186,37 @@ def get_categories():
     return render_template("categories.html",categories=categories)
 
 
-@app.route("/add_categories", methods=["GET", "POST"])
-def add_categories():
-    if request.method == "POST"
+@app.route("/add_category", methods=["GET", "POST"])
+def add_category():
+    if request.method == "POST":
         category = {
-            "category_name":request.form.get("category_name")
+            "category_name": request.form.get("category_name")
         }
         mongo.db.categories.insert_one(category)
         flash("New Category Added")
-    return render_template("get_categories.html"))
+        return redirect(url_for("get_categories"))
 
- return render_template("add_categories.html")
+
+        return render_template("add_category.html")
 
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
-def edit_categories(category_id):
-    if request.method == "POST"
-       submit = {
-           "category_name": request.form.get("category_name")
-           }
-           mongo.db.recipes.remove({"_id": ObjectId(recipes_id)})
-           flash("Category  Successfully Updated")
-           return redirect(url_for("get_categories"))
-        
-        category = mongo.db.categories.find_one("_id":objectId(category_id))}
-        return render_template("edit_categories.html",  category=category)
+def edit_category(category_id):
+    if request.method == "POST":
+        submit = {
+            "category_name": request.form.get("category_name")
+        }
+        mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
+        flash("Category Successfully Updated")
+        return redirect(url_for("get_categories"))
+
+    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    return render_template("edit_category.html", category=category)
 
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    if request.method == "POST":
+    if request.method =="POST":
         flash("Thanks {}, we have received your message!".format(
         request.form.get("name")))
         mongo.db.recipes.remove({"_id": ObjectId(posts_id)})
