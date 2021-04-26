@@ -186,6 +186,19 @@ def get_categories():
     return render_template("categories.html",categories=categories)
 
 
+@app.route("/add_categories", methods=["GET", "POST"])
+def add_categories():
+    if request.method == "POST"
+        category = {
+            "category_name":request.form.get("category_name")
+        }
+        mongo.db.categories.insert_one(category)
+        flash("New Category Added")
+    return render_template("get_categories.html"))
+
+ return render_template("add_categories.html")
+
+ 
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -204,8 +217,6 @@ def posts():
            session.pop(session["user"])
            return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
 
-
-# style (Static files (CSS, JavaScript, Images))
 
 
 
