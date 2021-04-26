@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-
 <h3 class="light-blue-text text-darken-4 center-align">Frubbiee drinks recipes</h3>
 
-
-{% for recipes in recipes %}
 <ul class="collapsible">
+    {% for recipes in recipes %}
     <li>
-        <div class="collapsible-header black-text .text-shadow teal lighten-3 lighten-3">
+        <div class="collapsible-header white-text light-blue darken-4 text-shadow">
             <div class="col s3">
                 <i class="fas fa-caret-down"></i>
-                {% if session.user|lower == recipes.create_by|lower %}
-                <a href="{{ url_for('edit_recipes',recipes_id=recipes._id)  }}" class=" btn-small teal lighten">Edit</a>
-                <a href="{{ url_for('posts',recipes_id=recipes._id)  }}" class=" btn-small teal darken-4">Done</a>
+                {% if session.user|lower == recipes.created_by|lower %}
+                <a href="{{ url_for('delete_recipes', recipes_id=recipes._id) }}"
+                    class="btn-small green accent-4">Done</a>
+                <a href="{{ url_for('edit_recipes', recipes_id=recipes._id) }}"
+                    class="btn-small light-blue lighten-1">Edit</a>
                 {% endif %}
             </div>
             <div class="col s9">
@@ -29,163 +29,13 @@
             <p><strong>Ingredients:{{recipes.recipe_description}}</strong></p><br>
             <p><strong> {{recipes.type_of_equipments}}</strong> </p><br>
             <p><strong> {{recipes.prep_time}}</strong> </p><br>
-            <p>{{recipes.created_by}}</p>
-            <div class="card col-md-12 s12">
-                <image src="{{url_for('static',filename='images/smoothie.jpg')}}">
-                    <span class="card-title">Card Title</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i
-                            class="fas fa-add-circle">Add</i></a>
-            </div>
+        </div>
+        </div>
+        <div class="collapsible-body">
+            <strong>{{ recipes.category_name }}</strong>
+            <p>{{ recipes.task_description }}</p>
+            <p><em>by: {{ recipes.created_by }}</em></p>
         </div>
     </li>
     {% endfor %}
-
 </ul>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img scr="{{url_for('static',filename='images/smoothie.jpg')}}"></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project One</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod
-                        odio,
-                        gravida pellentesque urna varius vitae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam
-                        nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non
-                        magni,
-                        voluptates quae, necessitatibus unde temporibus.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Three</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod
-                        odio,
-                        gravida pellentesque urna varius vitae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Four</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam
-                        nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non
-                        magni,
-                        voluptates quae, necessitatibus unde temporibus.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Five</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod
-                        odio,
-                        gravida pellentesque urna varius vitae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Six</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam
-                        nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non
-                        magni,
-                        voluptates quae, necessitatibus unde temporibus.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Smoothies
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Craving for something more, these healthy drinks will give you a boost of nutrition.
-                    </h3>
-                </a>
-                <p class="post-meta">Start your day refreshed with a drink of fresh juices and smoothies. .
-                    <a href="#">Frubbiee</a>
-                    fresh & tasty, 2021</p>
-            </div>
-            <hr>
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Fresh juice.
-                    </h2>
-                </a>
-                <p class="post-meta">Posted by
-                    <a href="#">Frubbiee</a>
-                    fresh & tasty, 2021</p>
-            </div>
-            <hr>
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Fitness and wellness drinks
-                    </h2>
-                    <h3 class="post-subtitle">
-                        We predict too much for the next year and yet far too little for the next ten.
-                    </h3>
-                </a>
-                <p class="post-meta">Posted by
-                    <a href="#">Frubbiee</a>
-                    fresh & tasty, 2021</p>
-            </div>
-            <hr>
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Kids Drinks
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Sure, water is the smartest drink out there, but sometimes its ok to have a little treat.
-                    </h3>
-                </a>
-                <p class="post-meta">Posted by
-                    <a href="#">Frubbiee</a>
-                    fresh & tasty</p>
-            </div>
-            <hr>
-            <!-- Pager -->
-            <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endblock %}

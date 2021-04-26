@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="light-black-text text-darken-4 center-align">Edit Recipes</h3>
+
+<div class="row card-panel grey lighten-4">
+    <form class="col s12 m8 offset-m2 cyan lighten-5" method="POST"
+        action="{{ url_for('get_recipes', recipes_id=recipes._id) }}">
+        <!-- category selection -->
+        <div class="row">
+            <div class="col s3">
+                <i class="fas fa-caret-down"></i>
+                {% if session.user|lower == recipes.create_by|lower %}
+                <a href="{{ url_for('edit_recipes',recipes_id=recipes._id)  }}" class=" btn-small teal lighten">Edit</a>
+                {% endif %}
+            </div>
+            <div class="col s9">
+                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
+                {% if recipes.my_favourite == "on" %}
+                <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
+                    data-tooltip="My favourite"></i>
+                {% endif%}
+            </div>
+            <div class="input-field col s12">
+                <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+                <select id="category_name" name="category_name" class="validate" required>
+                    <option value="" disabled>Choose Category</option>
+                    {% for categories in categories %}
+                    {% if categories.category_name == recipes.category_name %}
+                    <option value="{{ categories.category_name }}" selected>{{ categories.category_name }}</option>
+                    {% else %}
+                    <option value="{{ categories.category_name }}">{{ categories.category_name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <label for="category_name">Frubbiee category</label>
+            </div>
+        </div>
+        <!-- drink name -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-pen prefix light-teal-text text-darken-4 "></i>
+                <input id="main_ingredient" name="main_ingredient" minlenght="5" maxlength="50"
+                    value="{{recipes.main_ingredient}}" type="text" class="validate" required>
+                <label for="main_ingredient">Main Ingredient</label>
+            </div>
+        </div>
+        <!-- smoothie name -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-align-left prefix light-teal-text text-darken-4 "></i>
+                <textarea id="smoothie_name" name="smoothie_name" minlength="5" maxlength="200"
+                    class="materialize-textarea validate" required>{{ recipes.smoothie_name }}</textarea>
+                <label for="smoothie_name">Name of the drink</label>
+            </div>
+        </div>
+        <!-- recipe -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-align-left prefix light-teal-text text-darken-4 "></i>
+                <textarea id="recipe_descpription" name="recipe_description" minlength="5" maxlength="200"
+                    class="materialize-textarea validate" required>{{- recipes.recipes_description -}}</textarea>
+                <label for="recipe_description">Recipe description</label>
+            </div>
+        </div>
+        <!-- type of equipment -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-align-gears prefix light-teal-text text-darken-4 "></i>
+                <textarea id="type_of_equipments" name="type_of_equipments" minlength="5" maxlength="200"
+                    class="materialize-textarea validate" required>{{ recipes.type_of_equipments}}</textarea>
+                <label for="type_of_equipments">Type of equipments needed</label>
+            </div>
+        </div>
+        <!-- prep time -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-clock-alt prefix light-leal-text text-darken-4 "></i>
+                <label for="pre_time">Prep time</label>
+                <input id=" recipes.prep_time" name="prep_time" type="text" value="prep_time" class="timepicker">
+            </div>
+        </div>
+        <!-- my favourite option -->
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="switch">
+                    <i class="fas fa-exclamation-circle prefix light-teal-text text-darken-4 "></i>
+                    <label for="my_favourite">
+                        {% if recipes.my_favourite == "on" %}
+                        <label for="my_favourite">
+                            <input id=" my_favourite" type="checkbox" name="my_favourite" checked>
+                            {% else%}
+                            <input id="my_favourite" type="checkbox" name="my_favourite">
+                            {% endif %}
+                            <span class="lever"></span>
+                            My Favoutite
+                        </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-gears prefix light-teal-text text-darken-4 "></i>
+                    <textarea id="recipes.created_by" name="recipes.created_by" minlength="5" maxlength="200"
+                        class="materialize-textarea validate" required>{{ recipes.created_by}}</textarea>
+                    <label for="type_of_equipments">created by</label>
+                </div>
+
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <!-- cancel button -->
+                    <button type="submit" class="btn-medium light-blue darken-1 text-shadow">
+                        Edit Recipe<i class="fas fa-edit right"></i>
+                    </button>
+                </div>
+                <a href="{{ url_for('get_recipes')}}" class="btn-btn-medium red text-shadow">
+                    Cancel <i class="fas fa-times-circle right"></i>
+                </a>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

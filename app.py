@@ -39,6 +39,7 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
+@app.route("/get_recipes//<search_recipe>")
 def search_recipe(search_word):
     cursor = recipes.find({'$text': {'$search': search_word}})
     result = []
@@ -57,7 +58,8 @@ def search_recipe(search_word):
             message += f"{count}. {step}\n"
             count += 1
         message += '\n\n'
-    return message
+        flash("thank you for your request")
+        return render_template("recipes.html", recipes=recipes)
 
 
 
@@ -69,31 +71,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/member/<username>", methods=["GET", "POST"])
-def member(username):
-    if request.method == "POST":
-          existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-            
-    if existing_user:
-        flash("Username already exists")
-        return redirect(url_for("register"))
-
-        register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(register)
-
-        # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
-        flash("Registration Successful!")
-        return redirect(url_for("profile", username=session["user"]))
-
-    return render_template("register.html")
-
-
-
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -103,17 +80,12 @@ def contact():
 
 
 
-
-@app.route("/posts", methods=["POST"])
+app.route("/posts", methods=["POST"])
 def posts():
         if request.method == "POST":
            flash("Your recipe is been posted")
            session.pop(session["user"])
-           return render_template("posts.html")
-   
-   
-
-@app.route("/register", methods=["GET", "POST"])
+           return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         # check if username already exists in db

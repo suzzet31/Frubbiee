@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+<h3 class="light-blue-text text-darken-4 center-align">Add Recipes</h3>
 
-<h3 class="light-cyan-text  teal lighten-1 accent-2-text-darken-4 center-align">Add Recipes</h3>
-
-
-<div class=" col card-panel grey lighten-5">
-   <fieldset class="col s12 cyan lighten-5" method="POST" action="{{ url_for('add_recipes') }}">
+<div class="row card-panel grey lighten-5">
+   <form class="col s12" method="POST" action="{{ url_for('add_recipesk') }}">
       <!-- category selection -->
       <div class="row">
-         <div class=" input-field col s12">
-            <i class="fas fa-folder-open prefix teal lighten-4 text-darken-4 "></i>
+         <div class="input-field col s12">
+            <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
             <select id="category_name" name="category_name" class="validate" required>
                <option value="" disabled selected>Choose Category</option>
                {% for category in categories %}
@@ -19,6 +17,8 @@
             <label for="category_name">Frubbiee drink recipe</label>
          </div>
       </div>
+      <!-- recipe name -->
+
       <!-- drink name -->
       <div class="row">
          <div class="input-field col s12">
@@ -84,7 +84,7 @@
                   </div>
                </div>
             </div>
-   </fieldset>
-</div>
+            </fieldset>
+         </div>
 
-{% endblock %}
+         {% endblock %}
