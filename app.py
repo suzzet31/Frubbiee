@@ -86,6 +86,9 @@ def posts():
            flash("Your recipe is been posted")
            session.pop(session["user"])
            return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
+
+
+@app.route("/register")
 def register():
     if request.method == "POST":
         # check if username already exists in db
