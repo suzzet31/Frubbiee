@@ -57,32 +57,6 @@ def search_recipe(search_word):
         return render_template("recipes.html", recipes=recipes)
 
 
-
-@app.route("/logout")
-def logout():
-    # remove user from session cookie
-    flash("You have been logged out")
-    session.pop("user")
-    return redirect(url_for("login"))
-
-
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    if request.method == "POST":
-        flash("Thanks {}, we have received your message!".format(
-            request.form.get("name")))
-    return render_template("contact.html", page_title="Contact")
-
-
-
-app.route("/", methods=["POST"])
-def posts():
-        if request.method == "POST":
-           flash("Your recipe is been posted")
-           session.pop(session["user"])
-           return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
-
-
 @app.route("/register")
 def register():
     if request.method == "POST":
@@ -146,6 +120,14 @@ def profile(username):
 
 
 
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 @app.route("/add_recipes", methods=["GET","POST"])
 def add_recipes():
     if request.method == "POST":
@@ -189,6 +171,13 @@ def edit_recipes(recipes_id):
     return render_template("edit_recipes.html", recipes=recipes, categories=categories)
 
 
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
+    return render_template("contact.html", page_title="Contact")
+
 
 @app.route("/delete_recipes/<recipes_id>")
 def delete_recipes(recipes_id):
@@ -197,6 +186,13 @@ def delete_recipes(recipes_id):
     return redirect(url_for("get_recipes"))
 
 
+
+app.route("/post", methods=["POST"])
+def posts():
+        if request.method == "POST":
+           flash("Your recipe is been posted")
+           session.pop(session["user"])
+           return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
 
 
 # style (Static files (CSS, JavaScript, Images))

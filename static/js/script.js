@@ -1,12 +1,14 @@
-// materialize sidebar 
-$(".sidenav").sidenav({
-    edge: "right"
-});
-$(".collapsible").collapsible();
-$(".tooltipped").tooltip();
-$("select").formSelect();
-$('.timepicker').timepicker({
-    'methodName': paramName
+/*
+    jQuery for MaterializeCSS initialization
+*/
+
+$(document).ready(function () {
+    $(".sidenav").sidenav({
+        edge: "right"
+    });
+    $(".collapsible").collapsible();
+    $(".tooltipped").tooltip();
+    $("select").formSelect();
     $(".datepicker").datepicker({
         format: "dd mmmm, yyyy",
         yearRange: 3,
@@ -14,10 +16,6 @@ $('.timepicker').timepicker({
         i18n: {
             done: "Select"
         }
-    });
-
-    $('.timepicker').timepicker({
-        'methodName': paramName
     });
 
     validateMaterializeSelect();
