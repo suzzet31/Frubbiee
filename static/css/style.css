@@ -4,19 +4,7 @@
     margin: 0;
 }
 
-body {
-    text-decoration-style: Lato, sans-serif;
-    -webkit-text-size-adjust: auto;
-    text-overflow: #bbb;
-}
-
-.col-md-5 img {
-    width: 100%
-}
-
 div {
-    /* width: 300px; */
-    /* border: 15px solid green; */
     padding: 50px;
     margin: 20px;
 }
@@ -32,4 +20,8 @@ input {
 .flashes h4 {
     line-height: 2;
 
+}
+
+div~p {
+    background-color: rgb(147, 147, 101);
 }

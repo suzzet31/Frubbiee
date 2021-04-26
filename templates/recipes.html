@@ -5,7 +5,7 @@
 <ul class="collapsible">
     {% for recipes in recipes %}
     <li>
-        <div class="collapsible-header white-text light-blue darken-4 text-shadow">
+        <div class="collapsible-header white-text  cyan light-blue-text darken-4 text-shadow">
             <div class="col s3">
                 <i class="fas fa-caret-down"></i>
                 {% if session.user|lower == recipes.created_by|lower %}
@@ -33,7 +33,7 @@
         </div>
         <div class="collapsible-body">
             <strong>{{ recipes.category_name }}</strong>
-            <p>{{ recipes.task_description }}</p>
+            <p>{{ recipes.recipes_description }}</p>
             <p><em>by: {{ recipes.created_by }}</em></p>
         </div>
     </li>

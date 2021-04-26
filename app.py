@@ -13,11 +13,6 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-
-client = MongoClient('mongodb://localhost/')
-
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
@@ -80,7 +75,7 @@ def contact():
 
 
 
-app.route("/posts", methods=["POST"])
+app.route("/", methods=["POST"])
 def posts():
         if request.method == "POST":
            flash("Your recipe is been posted")
