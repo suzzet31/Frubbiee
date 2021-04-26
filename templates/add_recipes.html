@@ -1,57 +1,62 @@
 {% extends "base.html" %}
 {% block content %}
+
+
 <h3 class="light-blue-text text-darken-4 center-align">Add Recipes</h3>
 
-<div class="row card-panel grey lighten-5">
-   <form class="col s12" method="POST" action="{{ url_for('add_recipes') }}">
-      <!-- category selection -->
-      <div class="row">
-         <div class="input-field col s12">
-            <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
-            <select id="category_name" name="category_name" class="validate" required>
-               <option value="" disabled selected>Choose Category</option>
-               {% for category in categories %}
-               <option value="{{ category.category_name }}">{{ category.category_name }}</option>
-               {% endfor %}
-            </select>
-            <label for="category_name">Frubbiee drink recipe</label>
+<ul class="collapsible">
+   <div class="row card-panel grey lighten-5">
+      <form class="col s12" method="POST" action="{{ url_for('add_recipes') }}">
+         <!-- category selection -->
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+               <select id="category_name" name="category_name" class="validate" required>
+                  <option value="" disabled selected>Choose Category</option>
+                  {% for category in categories %}
+                  <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                  {% endfor %}
+               </select>
+               <label for="category_name">Frubbiee drink recipe</label>
+            </div>
          </div>
-      </div>
-      <!-- recipe name -->
+         <!-- recipe name -->
 
-      <!-- drink name -->
-      <div class="row">
-         <div class="input-field col s12">
-            <i class="fas fa-pen prefix  lighten-4 text-darken-4 "></i>
-            <input id="main_ingredient" name="main_ingredient" minlenght="5" maxlength="50" type="text" class="validate"
-               required>
-            <label for="main_ingredient">Type of drink</label>
+         <!-- drink name -->
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="fas fa-pen prefix  lighten-4 text-darken-4 "></i>
+               <input id="main_ingredient" name="main_ingredient" minlenght="5" maxlength="50" type="text"
+                  class="validate" required>
+               <label for="main_ingredient">Type of drink</label>
+            </div>
          </div>
-      </div>
-      <!-- smoothie name -->
-      <div class="row">
-         <div class="input-field col s12">
-            <i class="fas fa-align-left prefix  lighten-4 text-darken-4  "></i>
-            <textarea id="smoothie_name" name="smoothie_name" class="materialize-textarea validate" required></textarea>
-            <label for="smoothie_name">Name of smoothie</label>
+         <!-- smoothie name -->
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="fas fa-align-left prefix  lighten-4 text-darken-4  "></i>
+               <textarea id="smoothie_name" name="smoothie_name" class="materialize-textarea validate"
+                  required></textarea>
+               <label for="smoothie_name">Name of smoothie</label>
+            </div>
          </div>
-      </div>
-      <!-- recipe -->
-      <div class="row">
-         <div class="input-field col s12">
-            <i class="fas fa-align-left prefix  lighten-4 text-darken-4 "></i>
-            <textarea id="recipe_descpription" name="recipe_description" class="materialize-textarea validate"
-               required></textarea>
-            <label for="recipe_description">Recipe description</label>
+         <!-- recipe -->
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="fas fa-align-left prefix  lighten-4 text-darken-4 "></i>
+               <textarea id="recipe_descpription" name="recipe_description" class="materialize-textarea validate"
+                  required></textarea>
+               <label for="recipe_description">Recipe description</label>
+            </div>
          </div>
-      </div>
-      <!-- type of equipment -->
-      <div class="row">
-         <div class="input-field col s12">
-            <i class="fas fa-align-gears prefix  lighten-4 text-darken-4"></i>
-            <textarea id="type_of_equipments" name="type_of_equipments" class="materialize-textarea validate"
-               required></textarea>
-            <label for="type_of_equipments">Type of equipments needed</label>
+         <!-- type of equipment -->
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="fas fa-align-gears prefix  lighten-4 text-darken-4"></i>
+               <textarea id="type_of_equipments" name="type_of_equipments" class="materialize-textarea validate"
+                  required></textarea>
+               <label for="type_of_equipments">Type of equipments needed</label>
+            </div>
          </div>
          <!-- prep time -->
          <div class="row">
@@ -74,17 +79,22 @@
                      </label>
                </div>
             </div>
-            <!-- submit button -->
+         </div>
+         <!-- submit button -->
+         <div class="row">
             <div class="row">
-               <div class="row">
-                  <div class="col s12 center-align">
-                     <button type="submit" class="btn-medium light-cyan darken-1 text-shadow">
-                        Add Recipe <i class="fas fa-plus-square right"></i>
-                     </button>
-                  </div>
+               <div class="col s12 center-align">
+                  <button type="submit" class="btn-medium light-cyan darken-1 text-shadow">
+                     Add Recipe <i class="fas fa-plus-square right"></i>
+                  </button>
                </div>
             </div>
-            </fieldset>
          </div>
+      </form>
+   </div>
+</ul>
 
-         {% endblock %}
+
+
+
+{% endblock %}

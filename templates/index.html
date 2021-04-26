@@ -14,129 +14,36 @@
             <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST"
                 action="{{ url_for('index') }}">
 </body>
-<div href="#" class="d-container mb-12 h-500">
-    <div class="container h-100">
-        <div class="col">
-            <blockquote class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
-                    ante.
-                </p>
-                <footer class="blockquote-footer">Someone famous in
-                    <cite title="Source Title">Source Title</cite>
-                </footer>
-            </blockquote>
-            <div class="col-md-4">
-                {%for search_recipes in search_recipes%}
-                <!-- Search Widget -->
-                <div class="media mb-4"></div>
-                <h5 class="card-header">Search</h5>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <div class="col s9">
-                            <div class="col s3">
-                                <i class="fas fa-caret-down"></i>
-                                {% if session.user|lower == recipes.create_by|lower %}
-                                <a href="{{ url_for('edit_recipes',recipes_id=recipes._id)  }}"
-                                    class=" btn-small teal lighten">Edit</a>
-                                {% endif %}
-                            </div>
-                            <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
-                            {% if recipes.my_favourite == "on" %}
-                            <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped"
-                                data-position="right" data-tooltip="My favourite"></i>
-                            {% endif%}
+<div class="row">
+    <div class="col s12 m12 offset-m2">
+        <div class="card-panel">
+            <h3 class="center-align light-blue-text text-darken-4">
+                {{ username }}'s Profile
+            </h3>
+        </div>
 
-                        </div>
-                        <span class="input-group-append">
-                            <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                    </div>
+        <div class="col-md-8 mb-6">
+            <div class="card border-0 shadow">
+                <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    class="card-img-top" alt="...">
+                <div class=" text-center">
+                    <h5 class="card-title mb-0">Team Member</h5>
+                    <div class="card-text text-black-50">Web Developer</div>
                 </div>
             </div>
-
-            <!-- Categories Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Categories</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6"> <img class="img-fluid img-thumbnail "
-                                src="https://images.unsplash.com/photo-1615478503562-ec2d8aa0e24e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=20"
-                                classs="transparent" alt="">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Fruit smoothie</a>
-                                </li>
-                                <li>
-                                    <a href="#">Green SmoothieL</a>
-                                </li>
-                                <li>
-                                    <a href="#">Protein shakes</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Kids Smoothies</a>
-                                </li>
-                                <li>
-                                    <a href="#">Superfood drinks</a>
-                                </li>
-                                <li>
-                                    <a href="#">Detox drinks</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+        </div>
+        <!-- Team Member 2 -->
+        <div class=" col-md-8 mb-6">
+            <div class="card border-0 shadow">
+                <img src="https://images.unsplash.com/photo-1596392301391-e8622b210bd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                    class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-0">Team Member</h5>
+                    <div class="card-text text-black-50">Web Developer</div>
                 </div>
             </div>
-
-
-            <div class="col-12 text-center">
-                <h3 class="font-weight-light">Share your ideas</h3>
-                <p class="lead">with the community</p>
-                <div class="card my-4">
-                    <h5 class="card-header">Leave a Comment:</h5>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Single Comment -->
-                <div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <h5 class="mt-0">Commenter Name</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                        sollicitudin. Cras purus odio.
-                    </div>
-                </div>
-
-                <!-- Comment with nested comments -->
-
-                <!-- Sidebar Widgets Column -->
-
-
-                <!-- Side Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        Comment with is your favourite!
-                    </div>
-                </div>
-
-            </div>
-
         </div>
     </div>
-</div>
-</card-body>
-{%endfor%}
 
-{% endblock %}
+
+    {% endblock %}

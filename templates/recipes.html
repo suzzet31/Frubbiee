@@ -1,43 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 <h3 class="light-blue-text text-darken-4 center-align">Frubbiee drinks recipes</h3>
+<div class="row">
+    <div class="col s12 m12 offset-m2">
+        <li>
+            <div class="col-md-12 mb-6">
+                <div class="card border-0 shadow">
+                    <ul class="collapsible">
+                        {% for recipes in recipes %}
+                        <div class="collapsible-header white-text  cyan light-blue-text darken-4 text-shadow">
+                            <div class="col s3">
+                                <i class="fas fa-caret-down"></i>
+                                {% if session.user|lower == recipes.created_by|lower %}
+                                <a href="{{ url_for('delete_recipes', recipes_id=recipes._id) }}"
+                                    class="btn-small green accent-4">Done</a>
+                                <a href="{{ url_for('edit_recipes', recipes_id=recipes._id) }}"
+                                    class="btn-small light-blue lighten-1">Edit</a>
+                                {% endif %}
+                            </div>
+                            <div class="col s9">
+                                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
+                                {% if recipes.my_favourite == "on" %}
+                                <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped"
+                                    data-position="right" data-tooltip="My favourite"></i>
+                                {% endif%}
+                            </div>
+                        </div>
+                        <div class="collapsible-body">
+                            <p><strong>{{ recipes.main_ingredient}}</strong></p><br>
+                            <strong> {{recipes.smoothie_name}}</strong><br>
+                            <p><strong>Ingredients:{{recipes.recipe_description}}</strong></p><br>
+                            <p><strong> {{recipes.type_of_equipments}}</strong> </p><br>
+                            <p><strong> {{recipes.prep_time}}</strong> </p><br>
+                        </div>
+                </div>
+                <div class="collapsible-body">
+                    <strong>{{ recipes.category_name }}</strong>
+                    <p>{{ recipes.recipes_description }}</p>
+                    <p><em>by: {{ recipes.created_by }}</em></p>
+                </div>
+        </li>
+        </ul>
+    </div>
+</div>
+</div>
+{% endfor %}
 
-<ul class="collapsible">
-    {% for recipes in recipes %}
-    <li>
-        <div class="collapsible-header white-text  cyan light-blue-text darken-4 text-shadow">
-            <div class="col s3">
-                <i class="fas fa-caret-down"></i>
-                {% if session.user|lower == recipes.created_by|lower %}
-                <a href="{{ url_for('delete_recipes', recipes_id=recipes._id) }}"
-                    class="btn-small green accent-4">Done</a>
-                <a href="{{ url_for('edit_recipes', recipes_id=recipes._id) }}"
-                    class="btn-small light-blue lighten-1">Edit</a>
-                {% endif %}
-            </div>
-            <div class="col s9">
-                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
-                {% if recipes.my_favourite == "on" %}
-                <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
-                    data-tooltip="My favourite"></i>
-                {% endif%}
-            </div>
-        </div>
-        <div class="collapsible-body">
-            <p><strong>{{ recipes.main_ingredient}}</strong></p><br>
-            <strong> {{recipes.smoothie_name}}</strong><br>
-            <p><strong>Ingredients:{{recipes.recipe_description}}</strong></p><br>
-            <p><strong> {{recipes.type_of_equipments}}</strong> </p><br>
-            <p><strong> {{recipes.prep_time}}</strong> </p><br>
-        </div>
-        </div>
-        <div class="collapsible-body">
-            <strong>{{ recipes.category_name }}</strong>
-            <p>{{ recipes.recipes_description }}</p>
-            <p><em>by: {{ recipes.created_by }}</em></p>
-        </div>
-    </li>
-    {% endfor %}
 
-</ul>
 {% endblock %}

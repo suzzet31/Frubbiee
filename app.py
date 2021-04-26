@@ -140,6 +140,7 @@ def add_recipes():
             "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
             "my_favourite": my_favourite,
+            "created_by":session["user"]
         }
         mongo.db.recipes.insert_one(recipes)
         flash("Drink Successfully Added")
@@ -161,7 +162,8 @@ def edit_recipes(recipes_id):
             "recipe_description": request.form.get("recipe_description"),
             "type_of_equipments": request.form.get("type_of_equipments"),
             "pre_time": request.form.get("pre_time"),
-            "my_favourite": my_favourite  
+            "my_favourite": my_favourite,
+            "created_by":session["user"]
          }
         mongo.db.recipes.update({"_id": ObjectId(recipes_id)}, submit)
         flash("Drink Successfully updated")
@@ -171,20 +173,28 @@ def edit_recipes(recipes_id):
     return render_template("edit_recipes.html", recipes=recipes, categories=categories)
 
 
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    if request.method == "POST":
-        flash("Thanks {}, we have received your message!".format(
-            request.form.get("name")))
-    return render_template("contact.html", page_title="Contact")
-
-
 @app.route("/delete_recipes/<recipes_id>")
 def delete_recipes(recipes_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipes_id)})
     flash("Recipes Successfully Deleted")
     return redirect(url_for("get_recipes"))
 
+
+@app.route("/get_categories")
+def get_categories():
+    categories = list(mongo.db.categories.find().sort("category_name", 1))
+    return render_template("categories.html",categories=categories)
+
+
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+        request.form.get("name")))
+        mongo.db.recipes.remove({"_id": ObjectId(posts_id)})
+    flash("Recipes Successfully Deleted")
+    return render_template("contact.html", page_title="Contact")
 
 
 app.route("/post", methods=["POST"])
