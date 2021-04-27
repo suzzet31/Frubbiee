@@ -6,9 +6,15 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from jinja2 import Template
 from pymongo import MongoClient
+from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
+
+
+
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 app = Flask(__name__)
@@ -231,6 +237,65 @@ def posts():
            session.pop(session["user"])
            return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
 
+
+@app.route("/images")
+def images(x):
+    """
+    Dealing with Unix Path names and Windows PathNames
+    """
+    if platform.system() == 'Linux':
+        return  x[x.rfind("/")+1:]
+    return x[x.rfind("\\")+1: ]
+      
+def getFolder(x):
+        y = []
+        if platform.system() == 'Linux':
+            y = x.split("/")
+        else:
+            y = x.split("\\")
+       # print(y)
+        filename_name = "images"
+        if "images" in x:
+            filename +="smoothie.jpg/" + y[-2]
+        elif "juice.png" in x:
+            filename+="cherry.jpg"
+   
+@app.route("/send_file/<filename>")
+def send_file(filename):
+   return send_from_directory(app.config["UPLOAD_FOLDER"] +"/" + getFolder(filename) , getImageName(filename))
+
+
+def send_image(filename):
+    try:
+        pass
+    except expression as identifier:
+        pass
+    send_images = send_image_from_directory("images", filename)
+    
+
+@app.route("/gallery")
+def gallery():
+    image_name = os.listdir('static/images')
+    print(images)
+    return render_template("gallery.html", images=images)
+
+@app.route('/upload', methods = ['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return render_template("gallery.html", images=images )
 
 
 

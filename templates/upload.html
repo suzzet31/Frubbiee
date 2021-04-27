@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="light-grey-text  center-align">Log In!</h3>
+<div class="row">
+    <form class="col s12 m8 offset-m2 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('upload') }}">
+        <div class="card-panel ">
+
+            <div class="row">
+
+                <div class="col s3">
+                    <!-- Grey navigation panel -->
+                    <img src="{{url_for('static', filename='juice.png')}}" />
+                </div>
+
+                <div class="col s9">
+                    <!-- Teal page content  -->
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+{%endfor %}
+{% endblock %}

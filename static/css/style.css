@@ -40,3 +40,7 @@ div~p {
 ul li :hover ul li {
     display: block;
 }
+
+@media #{$medium-and-down} {
+    // styles for medium screens and down
+}
