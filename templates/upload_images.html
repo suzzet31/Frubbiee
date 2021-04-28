@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-{% block title %}Home endblock %}
-
+{% block title %}Fresh and tasty {%endblock %}
 {% block main%}
 
 <h3 class="light-grey-text  center-align">Upload file!</h3>
@@ -11,18 +10,20 @@
         <form action="/upload-image" method="POST" enctype="multipart/form-data">
 
             <div class="form-group">
-                <label>select image</label>
+                <label class=" black text .5rem"></label>select image</label>
                 <div class="custom-file">
-                    <input oninput="filename(this);" type="file" class="custom-file-input" name="image" id="image">
-                    <label class="custom-file-label" for="image">Select image...</label>
+                    <input oninput="filename(this);" type="file" class="white-text custom-file-input" name="image"
+                        id="image">
+                    <label class="custom-file-label grey lighten-4" for="image">Select image...</label>
                 </div>
             </div>
-            <button class="btn btn-outline-secondary" type="submit">upload-image</button>
+            <button href="{{url_for('upload_images') }}" class="cyan btn btn-outline-blue"
+                type="submit">upload-image</button>
         </form>
         <hr>
     </div>
 </div>
-
+{% endblock %}
 {% endblock %}
 
 {% block script %}

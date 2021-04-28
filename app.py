@@ -3,6 +3,7 @@ from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, 
     send_from_directory, jsonify, make_response)
+from datetime import datetime
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from jinja2 import Template
@@ -293,6 +294,8 @@ def upload_file():
         return render_template("gallery.html", upload_file=upload_file )
 
 
+# youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA)
+
 @app.route("/post/<images_id>", methods=["GET", "POST"])
 def post(images_id):
     if request.method == "POST":
@@ -318,6 +321,7 @@ def allowed_image(filename):
 ext = filename.rsplit(".", 1)[1]
 
 if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+
     return True
 else:
     return False
@@ -335,7 +339,7 @@ def upload_images():
     if request.method == "POST":
 
         if request.files:
-
+            
             if request.allowed_image_filesize(request.cookies.get("filesize")):
                 print("File exceeded maximum size")
                 return redirect(requst.url)
@@ -353,10 +357,13 @@ def upload_images():
                 filename = secure_filename(image.filename)
                      
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
+                filename = secure_filename(images.filename)
+                     
+                images.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
                 
                 print("Images saved")
 
-            return redirect(request.url)
+        return redirect(request.url)
 
     return render_template("upload_images.html") 
 

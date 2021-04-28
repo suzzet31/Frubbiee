@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+body {
+    color-interpolation-filters: auto;
+}
+
 div {
     padding: 50px;
     margin: 20px;
