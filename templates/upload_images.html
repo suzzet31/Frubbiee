@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+{% block title %}Home endblock %}
+
+{% block main%}
+
+<h3 class="light-grey-text  center-align">Upload file!</h3>
+<div class="container">
+    <div class="col">
+        <h1>Upload image</h1>
+        <form action="/upload-image" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>select image</label>
+                <div class="custom-file">
+                    <input oninput="filename(this);" type="file" class="custom-file-input" name="image" id="image">
+                    <label class="custom-file-label" for="image">Select image...</label>
+                </div>
+            </div>
+            <button class="btn btn-outline-secondary" type="submit">upload-image</button>
+        </form>
+        <hr>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    function filesize(elem) {
+
+        document.cookie = `filesize = ${elem.files[0].size}`;
+    }
+</script>
+
+
+
+{% endblock%}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="light-black-text text-darken-4 center-align">Add images</h3>
+
+<div class="row  card-panel grey lighten-4">
+    <form class="col s12 m8 offset-m2 cyan lighten-5" method="POST"
+        action="{{ url_for('post',images_id=images._id)  }}">
+        <!-- category selection -->
+        <div class="row">
+            <div class="col s3">
+                <i class="fas fa-caret-down"></i>
+                {% if session.user|lower == images.create_by|lower %}
+                <a href="{{ url_for('post',images_id=images._id)  }}" class=" btn-small teal lighten">Edit</a>
+                {% endif %}
+            </div>
+            <div class="col s9">
+                <strong>{{images.name_of_images}}</strong> : <strong>{{images.likes}}</strong>
+                {% if images.likes == "on" %}
+                <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
+                    data-tooltip="My favourite"></i>
+                {% endif%}
+            </div>
+            <div class="input-field col s12">
+                <i class="fas fa-folder-open prefix light-cyan-text text-darken-4"></i>
+                <select id="name_of_images" name="name_of_images" class="validate" required>
+                    <option value="" disabled>Frubbiee Images</option>
+                    {% for images in images %}
+                    {% if images.name_of_images  == images.name_of_images  %}
+                    <option value="{{ images.name_of_images }}" selected>{{ images.name_of_images }}</option>
+                    {% else %}
+                    <option value="{{ images.name_of_images }}">{{ images.name_of_images }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <label for="category_name">Frubbiee Images</label>
+            </div>
+        </div>
+        <!-- drink name -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-pen prefix light-teal-text text-darken-4 "></i>
+                <input id="name_of_images" name="name_of_images" minlenght="5" maxlength="50" value="{{images.name_of_images}" type="text" class="validate" required>
+                <label for="main_ingredient">Name of the Drink</label>
+            </div>
+        </div>
+        <!-- recipe -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-comment-0-left prefix light-teal-text text-darken-4 "></i>
+                <textarea id="images.comment" name="images.comment" minlength="5" maxlength="200"
+                    class="materialize-textarea validate" required>{{- images.comment -}}</textarea>
+                <label for=" images.comment">Comment</label>
+            </div>
+        </div>
+
+        <!-- my favourite option -->
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="switch">
+                    <i class="fas fa-thumbsup-circle prefix light-teal-text text-darken-4 "></i>
+                    <label for="like">
+                        {% if images.comment == "like" %}
+                        <label for="like">
+                            <input id=" my_favourite" type="checkbox" name="like" checked>
+                            {% else%}
+                            <input id="like" type="checkbox" name="like">
+                            {% endif %}
+                            <span class="lever"></span>
+                            My Favoutite
+                        </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-familygroup prefix light-teal-text text-darken-4 "></i>
+                    <textarea id="images.created_by" name="images.created_by" minlength="5" maxlength="200"
+                        class="materialize-textarea validate" required>{{ images.created_by}}</textarea>
+                    <label for="images.created_by">Added by</label>
+                </div>
+
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <!-- cancel button -->
+                    <button type="submit" class="btn-medium light-cyan darken-1 text-shadow">
+                        Post Image<i class="fas fa-edit right"></i>
+                    </button>
+                </div>
+                <a href="{{ url_for('post',images_id=images._id)  }} " class="btn-btn-medium red text-shadow">
+                    Cancel <i class="fas fa-times-circle right"></i>
+                </a>
+            </div>
+            <div class="col s9">
+                <strong>{{images.name_of_images }}</strong> : {{ images.like }}
+                {% if images.like == "on" %}
+                <i class="fas fa-thumbsup-circle light-blue-text text-lighten-2 tooltipped" data-position="right"
+                    data-tooltip="LIKE"></i>
+                {% endif %}
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <strong>{{ images.name_of_images }}</strong>
+            <p>{{ images.comment }}</p>
+            <p><em>by: {{ images.created_by }}</em></p>
+        </div>
+        </li>
+    </form>
+</div>
+
+{% endblock %}

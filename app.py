@@ -1,7 +1,8 @@
 import os
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for, send_from_directory)
+    redirect, request, session, url_for, 
+    send_from_directory, jsonify, make_response)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from jinja2 import Template
@@ -226,17 +227,11 @@ def contact():
         flash("Thanks {}, we have received your message!".format(
         request.form.get("name")))
         mongo.db.recipes.remove({"_id": ObjectId(posts_id)})
-    flash("Recipes Successfully Deleted")
+    flash("Your message has being sent")
     return render_template("contact.html", page_title="Contact")
 
 
-app.route("/post", methods=["POST"])
-def posts():
-        if request.method == "POST":
-           flash("Your recipe is been posted")
-           session.pop(session["user"])
-           return render_template("posts.html")@app.route("/register", methods=["GET", "POST"])
-
+# stackflow  
 
 @app.route("/images")
 def images(x):
@@ -295,8 +290,76 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return render_template("gallery.html", images=images )
+        return render_template("gallery.html", upload_file=upload_file )
 
+
+@app.route("/post/<images_id>", methods=["GET", "POST"])
+def post(images_id):
+    if request.method == "POST":
+        submit = {
+            "filename": request.form.get("images")
+        }
+        mongo.db.categories.update({"_id": ObjectId(images_id)}, submit)
+        flash("File Successfully Uploaded")
+        return redirect(url_for("add images"))
+
+    images = mongo.db.images.find_one({"_id": ObjectId(images_id)})
+    return render_template("gallery.html", images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
+
+app.config["IMAGE_UPLOADS"] = os.path.dirname(os.abspath(__file__))
+app.config["ALLOWED_IMAG_EXTENSIONS"] = ["PNG", "JPG", "JPEG" "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 0.5 *1024 *1024
+
+def allowed_image(filename):
+
+    if not "." in filename:
+        return False
+
+ext = filename.rsplit(".", 1)[1]
+
+if ext.upper() app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+    return True
+else:
+    return False
+
+def allowed_image_filesize(filesize):
+
+    if the int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
+
+@app.route("/upload-images",methods=["GET", "POST"])
+def upload_images():
+
+    if request.method == "POST":
+
+        if request.files:
+
+            if request.allowed_image_filesize(request.cookies.get("filesize")):
+                print("File exceeded maximum size")
+                return redirect(requst.url)
+
+
+            images = request.files["images"]
+             if image.filename =="":
+                 print ("Image must have a filename")
+                 return redirect(request.url)
+
+                 if not allowed_image(image.filename):
+                     print(Unfortunately your image was not successful)
+
+
+                 else:
+                     filename = secure_filename(image.filename)
+                     
+                     image.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
+
+                print(images saved)
+
+                 return redirect(request.url)
+
+    return render_template("upload_images.html") 
 
 
 if __name__ == "__main__":

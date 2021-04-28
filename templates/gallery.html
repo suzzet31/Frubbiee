@@ -2,10 +2,10 @@
 {% block content %}
 
 <h3 class="light-black-text text-darken-4 center-align">Images</h3>
-
+{% for upload_file in upload_file %}
 <div class="row ">
     <div class="col s12 center-align">
-        <a href="{{url_for('gallery')}}" class="btn-large light-cyan darken-2 text-shadow">
+        <a href="{{url_for('gallery',upload_file=upload_file)}}" class="btn-large light-cyan darken-2 text-shadow">
             Add category <i class="fas fa-plus-square right"></i>
         </a>
 
@@ -19,4 +19,34 @@
         </a>
     </div>
 </div>
+
+
+<ul class="collection">
+    <li class="collection-item avatar">
+        <span class="title">Title</span>
+        <p>First Line <br>
+            Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+        <i class="material-icons circle">folder</i>
+    </li>
+    <input type="file" name="file">
+    <a href="{{ url_for('gallery',upload_file=upload_file)}}" class="btn-btn-medium green text-shadow">
+        add image <i class="fas fa-times-circle right"></i>
+    </a>
+</ul>
+<ul>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
+    </div>
+</ul>
+
+{% endfor %}
+
 {% endblock%}
