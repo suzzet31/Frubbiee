@@ -317,14 +317,14 @@ def allowed_image(filename):
 
 ext = filename.rsplit(".", 1)[1]
 
-if ext.upper() app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
     return True
 else:
     return False
 
 def allowed_image_filesize(filesize):
 
-    if the int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
         return True
     else:
         return False
@@ -339,25 +339,24 @@ def upload_images():
             if request.allowed_image_filesize(request.cookies.get("filesize")):
                 print("File exceeded maximum size")
                 return redirect(requst.url)
-
-
-            images = request.files["images"]
-             if image.filename =="":
+                images = request.files["images"]
+            if image.filename =="":
                  print ("Image must have a filename")
                  return redirect(request.url)
 
-                 if not allowed_image(image.filename):
-                     print(Unfortunately your image was not successful)
+            if not allowed_image(image.filename):
+                
+                print("That Image extension is not allowed")
 
 
-                 else:
-                     filename = secure_filename(image.filename)
+            else:
+                filename = secure_filename(image.filename)
                      
-                     image.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
+                image.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
+                
+                print("Images saved")
 
-                print(images saved)
-
-                 return redirect(request.url)
+            return redirect(request.url)
 
     return render_template("upload_images.html") 
 
