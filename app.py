@@ -12,6 +12,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
+    import werkzeug
 
 
 
@@ -39,6 +40,11 @@ def index():
 def metrics():  # pragma: no cover
     content = get_file('jenkins_analytics.html')
     return Response(content, mimetype="text/html")
+
+
+@app.route('/uploads/<path:filename>')
+def download_file(filename):
+    return send_from_directory(directory_to_image_folder, filename, as_attachment=True)
 
 
 @app.route('/', defaults={'path': ''})
@@ -268,16 +274,27 @@ def send_file(filename):
 def upload_images():
 
     if request.method == "POST":
-
-        if request.files:
-            
+            if image.filename =="":
+                 return redirect(request.url)
+            if request.files:
+                return render_template(url_for("gallery.html"))
+            filename = images
             if request.allowed_image_filesize(request.cookies.get("filesize")):
                 print("File exceeded maximum size")
                 return redirect(requst.url)
-                images = request.files["images"]
-            if image.filename =="":
-                 print ("Image must have a filename")
-                 return redirect(request.url)
+                images = request.files[imagess]
+                images = os.listdir('static/images')
+            if request.method == "POST":
+                images = {
+                    "filename": request.form.get("images")
+                }
+                mongo.db.images.select({"_id": ObjectId(images_id)}, upload_images)
+                flash("File Successfully Uploaded")
+                    turn redirect(url_for("filename"))
+
+                filename = mongo.db.filename.find_one({"_id": ObjectId(images_id)},)
+                return render_template("gallery.html", filename=filename, upload_file=upload_file)
+
 
             if not allowed_image(image.filename):
                 
@@ -293,10 +310,8 @@ def upload_images():
                 images.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
                 
                 print("Images saved")
-
-        return redirect(request.url)
-
-    return render_template("upload_images.html") 
+                return redirect(request.url)
+                return render_template("upload_images.html") 
 
 @app.route("/gallery/<images>")
 def gallery(images):

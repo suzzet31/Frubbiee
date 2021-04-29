@@ -4,7 +4,7 @@
 <h3 class="light-black-text text-darken-4 center-align">Images</h3>
 {% for images in images %}
 <li>
-    <a href="{{ url_for('gallery',images_id=images._id) }}" class="btn-small green accent-4">upload</a>
+    <a href="{{ url_for('gallery',images_id=images_.id') }}" class="btn-small green accent-4">upload</a>
     <div class="collapsible-header white-text    teal lighten-3 text-shadow">
         <div class="input-field col s12">
             <i class="fas fa-folder-open prefix light-cyan-text text-darken-4"></i>
@@ -23,7 +23,7 @@
         <div class="col s3">
             <i class="fas fa-caret-down"></i>
             {% if session.user|lower == recipes.created_by|lower %}
-            <a href="{{ url_for('images', images_id=images._id) }}" class="btn-small green accent-4">upload</a>
+            <a href="{{ url_for('images',images_id=images_.id') }}" class="btn-small green accent-4">upload</a>
 
             {% endif %}
         </div>
