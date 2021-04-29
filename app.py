@@ -34,21 +34,6 @@ mongo = PyMongo(app)
 def index():
     index = list(mongo.db.index.find())
     return render_template("index.html", index=index )
-app.config.from_object(__name__)
-
-
-def root_dir():  # pragma: no cover
-    return os.path.abspath(os.path.dirname(__file__))
-
-
-def get_file(filename):  
-    try:
-        src = os.path.join(root_dir(), filename)
-        
-        return open(src).read()
-    except IOError as exc:
-        return str(exc)
-
 
 @app.route('/', methods=['GET'])
 def metrics():  # pragma: no cover
@@ -313,19 +298,19 @@ def upload_images():
 
     return render_template("upload_images.html") 
 
-@app.route("/gallery")
-def gallery():
+@app.route("/gallery/<images>")
+def gallery(images):
     images = os.listdir('static/images')
     if request.method == "POST":
         images = {
             "filename": request.form.get("images")
         }
-        mongo.db.images.select({"_id": ObjectId(images_id)}, submit)
+        mongo.db.images.select({"_id": ObjectId(images_id)}, upload_images)
         flash("File Successfully Uploaded")
         return redirect(url_for("filename"))
 
     filename = mongo.db.filename.find_one({"_id": ObjectId(images_id)},)
-    return render_template("gallery.html", filename=filename, images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
+    return render_template("gallery.html", filename=filename, upload_file=upload_file)
 
     print(images)
     return render_template("gallery.html", images=images)
@@ -396,10 +381,11 @@ def images(filename):
 
 
 
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('js', path)
-
+def gallery():
+    gallery = os.listdir('static/images')
+    if request.method == "POST":
+        gallery= mongo.db.images.find_one({"_id": ObjectId(images_id)})
+        return render_template("gallery.html", images=images)
 
 
 if __name__ == "__main__":

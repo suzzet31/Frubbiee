@@ -29,7 +29,26 @@
             <p><strong> {{images.created_by}}</strong> </p><br>
         </div>
     </li>
-    {% endfor %}
+    <form action="/upload-image" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <option value="" disabled>Choose filename</option>
+            <label class=" black text .5rem"></label>select image</label>
+            <div class="custom-file">
+                <input oninput="filename(this);" type="file" class="white-text custom-file-input" name="image"
+                    id="image" value="images.filename">
+                <label class="custom-file-label grey lighten-4" for="image">Select image...</label>
+            </div>
+        </div>
+        <button href="{{url_for('upload_images') }}" class="cyan btn btn-outline-blue"
+            type="submit">upload-image</button>
+    </form>
+    <hr>
+    <image src="{{url_for('static',filename = 'images/download.jpg')}}">
+        <!--filename  = "path of your image in in static folder"-->
+        </div>
+        </div>
+        {% endfor %}
 </ul>
 
 {% endblock %}
