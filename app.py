@@ -380,14 +380,6 @@ def images(filename):
     return send_from_directory("/images", filename=filename)
 
 
-
-def gallery():
-    gallery = os.listdir('static/images')
-    if request.method == "POST":
-        gallery= mongo.db.images.find_one({"_id": ObjectId(images_id)})
-        return render_template("gallery.html", images=images)
-
-
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
