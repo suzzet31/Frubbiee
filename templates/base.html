@@ -28,8 +28,11 @@
 
 </head>
 {% block head %}
+background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
+
 
 <body class="container-fluid scrollspy background">
+
     <div class="navbnavar-fixed">
         <nav class="nav-extended black text-shadow black darken-1 black scrollspy autocomplete responsive">
             <!-- top navbar -->
@@ -52,7 +55,7 @@
                     <li><a href="{{ url_for('images.html') }}">Images</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                    <li><a href="{{ url_for('images',images_id=images._id) }}">Post</a></li>
+                    <li><a href="{{ url_for('images') }}">Post</a></li>
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %}
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -80,7 +83,7 @@
             <li><a href="{{ url_for('images.html') }}">images</a></li>
             {% endif %}
             <li><a href="{{ url_for('contact') }}">Contact</a></li>
-            <li><a href="{{ url_for('images',images_id=images._id)  }}">Post</a></li>
+            <li><a href="{{ url_for('images') }}">Post</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Log In</a></li>
