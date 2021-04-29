@@ -48,9 +48,11 @@
                     <li><a href="{{ url_for('upload_images') }}">Manage Categories</a></li>
                     {% if session.user|lower == "admin"|lower %}
                     <li><a href="{{ url_for('get_categories') }}">Manage drink Categories</a></li>
+                    <li><a href="{{ url_for('upload.html') }}">Uploads</a></li>
+                    <li><a href="{{ url_for('images.html') }}">Images</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                    <li><a href="{{ url_for('post',images_id=images._id) }}">Post</a></li>
+                    <li><a href="{{ url_for('images',images_id=images._id) }}">Post</a></li>
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %}
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -74,9 +76,11 @@
             <li><a href="{{ url_for('upload_images') }}">Manage Categories</a></li>
             {% if session.user|lower == "admin"|lower %}
             <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
+            <li><a href="{{ url_for('upload.html') }}">Uploads</a></li>
+            <li><a href="{{ url_for('images.html') }}">images</a></li>
             {% endif %}
             <li><a href="{{ url_for('contact') }}">Contact</a></li>
-            <li><a href="{{ url_for('post',images_id=images._id)  }}">Post</a></li>
+            <li><a href="{{ url_for('images',images_id=images._id)  }}">Post</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Log In</a></li>

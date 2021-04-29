@@ -19,7 +19,7 @@ UPLOAD_FOLDER = '/path/to/the/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
@@ -34,6 +34,41 @@ mongo = PyMongo(app)
 def index():
     index = list(mongo.db.index.find())
     return render_template("index.html", index=index )
+app.config.from_object(__name__)
+
+
+def root_dir():  # pragma: no cover
+    return os.path.abspath(os.path.dirname(__file__))
+
+
+def get_file(filename):  
+    try:
+        src = os.path.join(root_dir(), filename)
+        
+        return open(src).read()
+    except IOError as exc:
+        return str(exc)
+
+
+@app.route('/', methods=['GET'])
+def metrics():  # pragma: no cover
+    content = get_file('jenkins_analytics.html')
+    return Response(content, mimetype="text/html")
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def get_resource(path): 
+    mimetypes = {
+        ".css": "text/css",
+        ".html": "text/html",
+        ".js": "application/javascript",
+    }
+    complete_path = os.path.join(root_dir(), path)
+    ext = os.path.splitext(path)[1]
+    mimetype = mimetypes.get(ext, "text/html")
+    content = get_file(complete_path)
+    return Response(content, mimetype=mimetype)
 
 
 @app.route("/get_recipes")
@@ -234,27 +269,10 @@ def contact():
 
 # stackflow  
 
-@app.route("/images")
-def images(x):
-    """
-    Dealing with Unix Path names and Windows PathNames
-    """
-    if platform.system() == 'Linux':
-        return  x[x.rfind("/")+1:]
-    return x[x.rfind("\\")+1: ]
-      
-def getFolder(x):
-        y = []
-        if platform.system() == 'Linux':
-            y = x.split("/")
-        else:
-            y = x.split("\\")
-       # print(y)
-        filename_name = "images"
-        if "images" in x:
-            filename +="smoothie.jpg/" + y[-2]
-        elif "juice.png" in x:
-            filename+="cherry.jpg"
+@app.route("/static/<images>")
+def images():
+    return render_template("static= images")
+
    
 @app.route("/send_file/<filename>")
 def send_file(filename):
@@ -267,13 +285,57 @@ def send_image(filename):
     except expression as identifier:
         pass
     send_images = send_image_from_directory("images", filename)
-    
+
+app.route("/images")
+def images():
+        if request.method =="POST":
+          like = "on" if request.form.get("like") else "off"
+          submit = {
+            "filename": request.form.get("filename"),
+            "comment": request.form.get("commentt"),
+            "like": like,
+            "created_by":session["user"]
+            }
+          mongo.db.images.upload({"_id": ObjectId(images_id)}, submit)
+          flash("Image Successfully uploaded")
+
+          images = mongo.db.filename.find().sort("filename", 1)
+          return render_template("post.html", images=images, filename=filename)
+
 
 @app.route("/gallery")
 def gallery():
-    image_name = os.listdir('static/images')
+    images = os.listdir('static/images')
+    if request.method == "POST":
+        images = {
+            "filename": request.form.get("images")
+        }
+        mongo.db.images.select({"_id": ObjectId(images_id)}, submit)
+        flash("File Successfully Uploaded")
+        return redirect(url_for("add images"))
+
+    images = mongo.db.find({"_id": ObjectId(images_id)})
+    flash("Your image has being uploaded")
+
+    images = mongo.db.images.find_one({"_id": ObjectId(images_id)})
+    return render_template("gallery.html", images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
+
     print(images)
     return render_template("gallery.html", images=images)
+
+
+@app.route("/upload/<images>", methods=["GET", "POST"])
+def upload(images):
+    if request.method == "POST":
+        submit = {
+            "images": request.form.get("images")
+        }
+        mongo.db.images.update({"_id": ObjectId(images_id)}, submit)
+        flash("imagesSuccessfully Updated")
+        return redirect(url_for("gallery.html"))
+        
+    images = mongo.db.users.find_one({"images": session["user"]})["images"]
+    return render_template("upload.html", images=images)     
 
 @app.route('/upload', methods = ['GET', 'POST'])
 def upload_file():
@@ -306,32 +368,23 @@ def post(images_id):
         flash("File Successfully Uploaded")
         return redirect(url_for("add images"))
 
+    images_id = mongo.db.find({"_id": ObjectId(images_id)})
+    flash("Your image has being uploaded")
+
     images = mongo.db.images.find_one({"_id": ObjectId(images_id)})
     return render_template("gallery.html", images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
 
-app.config["IMAGE_UPLOADS"] = os.path.dirname(os.abspath(__file__))
+
 app.config["ALLOWED_IMAG_EXTENSIONS"] = ["PNG", "JPG", "JPEG" "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 *1024 *1024
 
 def allowed_image(filename):
 
     if not "." in filename:
-        return False
-
-ext = filename.rsplit(".", 1)[1]
-
-if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
-
-    return True
-else:
-    return False
-
-def allowed_image_filesize(filesize):
-
-    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
-        return True
-    else:
-        return False
+        def allowed_image_filesize(filesize):
+             if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+                 return render_template("gallery.html", images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
+                 
 
 @app.route("/upload-images",methods=["GET", "POST"])
 def upload_images():
@@ -366,6 +419,11 @@ def upload_images():
         return redirect(request.url)
 
     return render_template("upload_images.html") 
+
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
+
 
 
 if __name__ == "__main__":
