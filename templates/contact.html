@@ -6,7 +6,7 @@
 
 <body>
     <div>
-
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('contact') }}">
 
     </div>
 
@@ -55,7 +55,34 @@
             </form>
         </div>
     </div>
+    <div id=container 1>
+        <form action='/users' method='post'>
+            <li>
+                Name: <input type='text' id="smoothie" value="" name="smoothie">
+                Recipes: <select name="smoothie">
+                    <option value="Strawberry smoothie">Strawberry smoothie</option>
+                    <option value="banana smoothie">Banana smoothie</option>
+                    <option value="lemon smoothie">Lemon smoothie</option>
+                    <option value="green smoothie">Green smoothie</option>
+                    <option value="detox smoothie">Detox smoothi</option>
+                    <option value="Mango smoothie">Mango smoothie</option>
+                    <option value="Cherry smoothie">Cherry smoothie</option>
+                    <option value="Almond smoothie">Almond smoothie</option>
+                    <option value="Carrot detox smoothie">Carrot detox smoothie</option>
+                </select>
+                Favorite Drinks: <select id="drink" value="" name="Drink">
+                    <option value="Mango juice">Mango juice</option>
+                    <option value="Pineapple juice">Pineapple juice</option>
+                    <option value="Orange juice">Orange juice</option>
+                    <option value="Apple drink">Apple drink</option>
+                    <option value="mixed berries juice">mixed berries juice</option>
+                </select>
+            </li>
+            <textarea name="textarea" value="textbox" rows="4" cols="50" name="comment"></textarea>
 
+            <input type='submit' value='submit'>
+        </form>
+    </div>
 
     <hr>
     <div class="row">
@@ -107,7 +134,7 @@
         </div>
     </footer>
     <div class="card col12 s12">
-        <image src="{{url_for('static',filename='images/cherry.jpg')}}">
+        <image src="{{url_for('contact')}}">
             <span class="card-title">Card Title</span>
             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-add-circle">Add</i></a>
     </div>

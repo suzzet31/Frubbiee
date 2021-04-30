@@ -6,6 +6,7 @@ $(document).ready(function () {
     $(".sidenav").sidenav({
         edge: "right"
     });
+    $('input#input_text, textarea#textarea2').characterCounter();
     $(".collapsible").collapsible();
     $(".tooltipped").tooltip();
     $('.materialboxed').materialbox();
@@ -19,6 +20,10 @@ $(document).ready(function () {
         }
     });
 
+    function filesize(elem) {
+
+        document.cookie = `filesize = ${elem.files[0].size}`;
+    }
     validateMaterializeSelect();
 
     function validateMaterializeSelect() {

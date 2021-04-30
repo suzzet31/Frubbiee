@@ -3,82 +3,34 @@
 
 <h3 class="light-black-text text-darken-4 center-align">Images</h3>
 
-<li>
-    <a href="{{ url_for('gallery') }}" class="btn-small green accent-4">upload</a>
-    <div class="collapsible-header white-text    teal lighten-3 text-shadow">
-        <div class="input-field col s12">
-            <i class="fas fa-folder-open prefix light-cyan-text text-darken-4"></i>
-            <select id="images.filename" name="images.filename" class="validate" required>
-                <option value="" disabled>Frubbiee Images</option>
-                {% for images in images %}
-                {% if images.filename  == images.filename  %}
-                <option value="{{ images.filename }}" selected>{{ images.filename }}</option>
-                {% else %}
-                <option value="{{ images.filename }}">{{ images.filename }}</option>
-                {% endif %}
-                {% endfor %}
-            </select>
-            <label for="images.filename">Frubbiee Images</label>
-        </div>
-        <div class="col s3">
-            <i class="fas fa-caret-down"></i>
 
-            <a href="{{ url_for('images') }}" class="btn-small green accent-4">upload</a>
+<a href="{{ url_for('get_images') }}" class="btn-small green accent-4">upload</a>
+<div class="collapsible-header white-text    teal lighten-3 text-shadow">
 
+    <div class="row ">
+        <div class="col s12 center-align">
 
-        </div>
-        <div class="col s12">
-            <strong>{{filename}}</strong> : <strong>{{like}}</strong>
-            {% if like == "on" %}
-            <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
-                data-tooltip="My favourite"></i>
-            {% endif%}
-        </div>
-    </div>
-    <div class="collapsible-body col-8">
-        {% for images in images %}
-        <p><strong>{{ images.filename}}</strong></p><br>
-        <strong> {{images.comment}}</strong><br>
-        <p><strong>Ingredients:{{images.like}}</strong></p><br>
-        <p><strong> {{images.created_by}}</strong> </p><br>
-        {% endfor%}
-    </div>
-</li>
-<div class="row ">
-    <div class="col s12 center-align">
-        <a href="{{ url_for('gallery')}}" class="btn-large light-black darken-2 text-shadow right">
-            Add Images <i class="fas fa-plus-square right"></i>
-        </a>
-    </div>
-</div>
+            <a href="{{ url_for('gallery')}}" class="secondary-content"><i class="material-icons">grade</i></a>
+            <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                class="card-img-top" alt="...">
+            <div class=" text-center">
+                <h5 class="card-title mb-0">A Treat</h5>
+                <div class="card-text text-black-50">Icecream and Mashmallow Smoothie</div>
 
-
-<ul class="collection">
-    <li class="collection-item avatar">
-        <span class="title">Title</span>
-        <p>Pinacolada Juice <br>
-            special ingredient Pineapple
-        </p>
-        <a href="{{ url_for('gallery')}}" class="secondary-content"><i class="material-icons">grade</i></a>
-        <ul>
-            <div class="card" style="width: 25rem;">
-                <img class="card-img-top"
-                    src="https://images.unsplash.com/photo-1596392301391-e8622b210bd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
+                <img src="https://images.unsplash.com/photo-1596392301391-e8622b210bd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                    class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-0">Detox smoothie</h5>
+                    <div class="card-text text-black-50">Pineapple detox smoothie</div>
                 </div>
+
+                <input type="file" name="file">
+                <a href="{{ url_for('gallery')}}" class="btn-btn-medium cyan text-shadow">
+                    add image <i class="fas fa-times-circle right"></i>
+                </a>
             </div>
 
-            </div>
-            <input type="file" name="file">
-            <a href="{{ url_for('gallery')}}" class="btn-btn-medium cyan text-shadow">
-                add image <i class="fas fa-times-circle right"></i>
-            </a>
-    </li>
-</ul>
-</ul>
 
 
-{% endblock %}
+
+            {% endblock %}

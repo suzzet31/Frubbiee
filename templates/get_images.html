@@ -11,7 +11,7 @@
             <div class="col s3">
                 <i class="fas fa-caret-down"></i>
                 {% if session.user|lower == images.create_by|lower %}
-                <a href="{{ url_for('edit_images',images_id=images._id)  }}" class=" btn-small teal lighten">Edit</a>
+                <a href="{{ url_for('edit_images',images_id=images._id)  }}" class=" btn-small teal lighten">Add</a>
                 {% endif %}
             </div>
             <div class="col s9">
@@ -63,6 +63,35 @@
                 </div>
 
             </div>
+
+            <body>
+                <div id=container 1>
+                    <form action='/users' method='post'>
+                        Name: <input type='text' name='name'>
+                        Recipes: <select name="smoothie">
+                            <option value="Strawberry smoothie">Strawberry smoothie</option>
+                            <option value="banana smoothie">Banana smoothie</option>
+                            <option value="lemon smoothie">Lemon smoothie</option>
+                            <option value="green smoothie">Green smoothie</option>
+                            <option value="detox smoothie">Detox smoothi</option>
+                            <option value="Mango smoothie">Mango smoothie</option>
+                            <option value="Cherry smoothie">Cherry smoothie</option>
+                            <option value="Almond smoothie">Almond smoothie</option>
+                            <option value="Carrot detox smoothie">Carrot detox smoothie</option>
+                        </select>
+                        Favorite Drinks: <select name="Drink">
+                            <option value="Mango juice">Mango juice</option>
+                            <option value="Pineapple juice">Pineapple juice</option>
+                            <option value="Orange juice">Orange juice</option>
+                            <option value="Apple drink">Apple drink</option>
+                            <option value="mixed berries juice">mixed berries juice</option>
+                        </select>
+                        <textarea name="textarea" value="textbox" rows="4" cols="50" name="comment"></textarea>
+
+                        <input type='submit' value='submit'>
+                    </form>
+                </div>
+            </body>
             <!-- submit button -->
             <div class="row">
                 <div class="col s12 center-align">
@@ -78,3 +107,4 @@
     </form>
 </div>
 {%endfor%}
+{% endblock %}

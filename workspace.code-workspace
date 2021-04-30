@@ -1,0 +1,9 @@
+{
+	"folders": [{
+		"path": "."
+	}],
+	"settings": {
+		"files.autoSave": "off",
+		"workbench.colorTheme": "Visual Studio Dark"
+	}
+}
