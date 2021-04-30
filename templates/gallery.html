@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content%}
-{% block main%}
+
 <h3 class="light-black-text text-darken-4 center-align">Images</h3>
-{% for images in images %}
+
 <li>
-    <a href="{{ url_for('gallery',images_id=images_.id') }}" class="btn-small green accent-4">upload</a>
+    <a href="{{ url_for('gallery') }}" class="btn-small green accent-4">upload</a>
     <div class="collapsible-header white-text    teal lighten-3 text-shadow">
         <div class="input-field col s12">
             <i class="fas fa-folder-open prefix light-cyan-text text-darken-4"></i>
-            <select id="filename" name="filename" class="validate" required>
+            <select id="images.filename" name="images.filename" class="validate" required>
                 <option value="" disabled>Frubbiee Images</option>
                 {% for images in images %}
                 {% if images.filename  == images.filename  %}
@@ -18,34 +18,35 @@
                 {% endif %}
                 {% endfor %}
             </select>
-            <label for="filename">Frubbiee Images</label>
+            <label for="images.filename">Frubbiee Images</label>
         </div>
         <div class="col s3">
             <i class="fas fa-caret-down"></i>
-            {% if session.user|lower == recipes.created_by|lower %}
-            <a href="{{ url_for('images',images_id=images_.id') }}" class="btn-small green accent-4">upload</a>
 
-            {% endif %}
+            <a href="{{ url_for('images') }}" class="btn-small green accent-4">upload</a>
+
+
         </div>
         <div class="col s12">
-            <strong>{{images.filename}}</strong> : <strong>{{images.like}}</strong>
-            {% if images.like == "on" %}
+            <strong>{{filename}}</strong> : <strong>{{like}}</strong>
+            {% if like == "on" %}
             <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
                 data-tooltip="My favourite"></i>
             {% endif%}
         </div>
     </div>
     <div class="collapsible-body col-8">
+        {% for images in images %}
         <p><strong>{{ images.filename}}</strong></p><br>
         <strong> {{images.comment}}</strong><br>
         <p><strong>Ingredients:{{images.like}}</strong></p><br>
         <p><strong> {{images.created_by}}</strong> </p><br>
+        {% endfor%}
     </div>
 </li>
 <div class="row ">
     <div class="col s12 center-align">
-        <a href="{{ url_for('gallery',images_id=images_.id')}}"
-            class="btn-large light-black darken-2 text-shadow right">
+        <a href="{{ url_for('gallery')}}" class="btn-large light-black darken-2 text-shadow right">
             Add Images <i class="fas fa-plus-square right"></i>
         </a>
     </div>
@@ -58,7 +59,7 @@
         <p>Pinacolada Juice <br>
             special ingredient Pineapple
         </p>
-        <a href={% endblock %}class="secondary-content"><i class="material-icons">grade</i></a>
+        <a href="{{ url_for('upload_images')}}" class="secondary-content"><i class="material-icons">grade</i></a>
         <ul>
             <div class="card" style="width: 25rem;">
                 <img class="card-img-top"
@@ -78,7 +79,6 @@
     </li>
 </ul>
 </ul>
-{% for upload_file in upload_file %}
-{% endfor %}
 
-{% endblock%}
+
+{% endblock %}

@@ -2,14 +2,15 @@
 {% block content %}
 
 <h3 class="light-cyan-text text-darken-4 center-align">Frubbiee drinks</h3>
-
+<card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('images') }}">
+</card-body>
 <ul class="collapsible">
     {% for images in images %}
     <li>
         <div class="collapsible-header white-text    teal lighten-3 text-shadow">
             <div class="col s3">
                 <i class="fas fa-caret-down"></i>
-                {% if session.user|lower == recipes.created_by|lower %}
+                {% if session.user|lower == images.created_by|lower %}
                 <a href="{{ url_for('images', images_id=images._id) }}" class="btn-small green accent-4">upload</a>
 
                 {% endif %}

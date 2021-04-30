@@ -282,15 +282,26 @@ def upload_images():
             if request.allowed_image_filesize(request.cookies.get("filesize")):
                 print("File exceeded maximum size")
                 return redirect(requst.url)
-                images = request.files[imagess]
+                images = request.files[images]
                 images = os.listdir('static/images')
             if request.method == "POST":
                 images = {
                     "filename": request.form.get("images")
                 }
+            class Contact(db.Model):
+                __tablename__ = 'contacts'
+                id = db.Column(db.Integer, primary_key=True)
+                first_name = db.Column(db.String(100))
+                last_name = db.Column(db.String(100))
+                phone_number = db.Column(db.String(32))
+
+            def __repr__(self):
+                return '<images {0} {1}: {2}>'.format(self.first_name,
+                                                    self.last_name,
+                                                    self.phone_number)
                 mongo.db.images.select({"_id": ObjectId(images_id)}, upload_images)
                 flash("File Successfully Uploaded")
-                    turn redirect(url_for("filename"))
+                return redirect(url_for("filename"))
 
                 filename = mongo.db.filename.find_one({"_id": ObjectId(images_id)},)
                 return render_template("gallery.html", filename=filename, upload_file=upload_file)
@@ -313,22 +324,46 @@ def upload_images():
                 return redirect(request.url)
                 return render_template("upload_images.html") 
 
-@app.route("/gallery/<images>")
-def gallery(images):
+@app.route("/gallery")
+def gallery():
     images = os.listdir('static/images')
     if request.method == "POST":
         images = {
             "filename": request.form.get("images")
         }
-        mongo.db.images.select({"_id": ObjectId(images_id)}, upload_images)
+        mongo.db.images.select( upload_images)
         flash("File Successfully Uploaded")
         return redirect(url_for("filename"))
 
-    filename = mongo.db.filename.find_one({"_id": ObjectId(images_id)},)
+    filename = mongo.db.filename.find_one()
     return render_template("gallery.html", filename=filename, upload_file=upload_file)
 
     print(images)
     return render_template("gallery.html", images=images)
+    form = AddRecipe()
+    user = User.query.filter_by(id=current_user.id).first()
+    imagesList = []
+
+    if request.method == 'POST' and 'image[]' in request.files:
+        if form.validate_on_submit():
+            product = recipe()
+            file = request.files.getlist("image[]")
+            for zipfile in file:
+                filename = zipfile.filename.split('/')[0]
+                zipfile.save(os.path.join(UPLOAD_FOLDER, filename))
+                imagesList.append(filename)
+
+            product.images = imagesList[imagesList]
+            db.session.add(image)
+            db.session.commit()
+
+            flash('Images Uploaded', 'success')
+            return redirect(url_for('master.index'))
+
+    else:
+        return render_template('add-recipes.html', form=form)
+    return render_template('add-recipes.html', form=form, action='add')
+
 
 @app.route("/upload/<images>", methods=["GET", "POST"])
 def upload(images):
@@ -393,6 +428,23 @@ def allowed_image(filename):
 @app.route("/images")
 def images(filename):
     return send_from_directory("/images", filename=filename)
+
+app.route("/images/<filename>")
+def images(filename):
+        if request.method =="POST":
+          like = "on" if request.form.get("like") else "off"
+          filename = {
+            "images.filename": request.form.get("filename"),
+            "images.comment": request.form.get("commentt"),
+            "images.like": like,
+            "created_by":session["user"]
+            }
+          mongo.db.images.upload({"_id": ObjectId(images_id)}, filename)
+          flash("Image Successfully uploaded")
+
+          filename = mongo.db.filename.find().sort("filename", 1)
+          return render_template("images.html", images=images, filename=filename)
+
 
 
 if __name__ == "__main__":
