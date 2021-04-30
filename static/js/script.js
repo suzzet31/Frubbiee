@@ -8,6 +8,7 @@ $(document).ready(function () {
     });
     $(".collapsible").collapsible();
     $(".tooltipped").tooltip();
+    $('.materialboxed').materialbox();
     $("select").formSelect();
     $(".datepicker").datepicker({
         format: "dd mmmm, yyyy",

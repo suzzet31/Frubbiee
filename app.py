@@ -2,7 +2,7 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, 
-    send_from_directory, jsonify, make_response)
+    send_from_directory, jsonify, make_response, send_file)
 from datetime import datetime
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -10,10 +10,9 @@ from jinja2 import Template
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 if os.path.exists("env.py"):
     import env
-    import werkzeug
-
 
 
 UPLOAD_FOLDER = '/path/to/the/uploads'
@@ -35,31 +34,6 @@ mongo = PyMongo(app)
 def index():
     index = list(mongo.db.index.find())
     return render_template("index.html", index=index )
-
-@app.route('/', methods=['GET'])
-def metrics():  # pragma: no cover
-    content = get_file('jenkins_analytics.html')
-    return Response(content, mimetype="text/html")
-
-
-@app.route('/uploads/<path:filename>')
-def download_file(filename):
-    return send_from_directory(directory_to_image_folder, filename, as_attachment=True)
-
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def get_resource(path): 
-    mimetypes = {
-        ".css": "text/css",
-        ".html": "text/html",
-        ".js": "application/javascript",
-    }
-    complete_path = os.path.join(root_dir(), path)
-    ext = os.path.splitext(path)[1]
-    mimetype = mimetypes.get(ext, "text/html")
-    content = get_file(complete_path)
-    return Response(content, mimetype=mimetype)
 
 
 @app.route("/get_recipes")
@@ -258,11 +232,52 @@ def contact():
     return render_template("contact.html", page_title="Contact")
 
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+@app.route('/', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the files part
+        if 'files[]' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        files = request.files.getlist('files[]')
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash('Files successfully uploaded')
+        return redirect('/')
+
+@app.route('/foo', methods=['GET'])
+def foo():
+    for root, dirs, files in os.walk(app.config['UPLOAD_FOLDER']):
+        for file in files:
+            if file.endswith('B4.TIF'):
+                fname4 = os.path.join(app.config['UPLOAD_FOLDER'], file)
+            if file.endswith('B5.TIF'):
+                fname5 = os.path.join(app.config['UPLOAD_FOLDER'], file)
+
+    bytes_obj = plot(fname4,fname5)
+
+    return send_file(bytes_obj,
+                     attachment_filename='plot.png',
+                     mimetype='image/png')
+
+
 # stackflow  
 
 @app.route("/""/<filename_local>")
 def myfiles(filename_local):
     return send_from_directory("/index", filename_local)
+
+    
+@app.route('/uploads/<path:filename>')
+def download_file(filename):
+    return send_from_directory(directory_to_image_folder, filename, as_attachment=True)
 
 
 @app.route("/send_file/<filename>")
@@ -270,59 +285,30 @@ def send_file(filename):
    return send_from_directory(app.config["UPLOAD_FOLDER"] +"/" + getFolder(filename) , getImageName(filename))
 
 
+
+
 @app.route("/upload-images",methods=["GET", "POST"])
 def upload_images():
-
     if request.method == "POST":
-            if image.filename =="":
-                 return redirect(request.url)
-            if request.files:
-                return render_template(url_for("gallery.html"))
-            filename = images
-            if request.allowed_image_filesize(request.cookies.get("filesize")):
-                print("File exceeded maximum size")
-                return redirect(requst.url)
-                images = request.files[images]
-                images = os.listdir('static/images')
-            if request.method == "POST":
-                images = {
-                    "filename": request.form.get("images")
-                }
-            class Contact(db.Model):
-                __tablename__ = 'contacts'
-                id = db.Column(db.Integer, primary_key=True)
-                first_name = db.Column(db.String(100))
-                last_name = db.Column(db.String(100))
-                phone_number = db.Column(db.String(32))
+        images = os.listdir('static/images')
+    if request.method == "POST":
+             if form.validate_on_submit()== True:
 
-            def __repr__(self):
-                return '<images {0} {1}: {2}>'.format(self.first_name,
-                                                    self.last_name,
-                                                    self.phone_number)
-                mongo.db.images.select({"_id": ObjectId(images_id)}, upload_images)
-                flash("File Successfully Uploaded")
-                return redirect(url_for("filename"))
-
-                filename = mongo.db.filename.find_one({"_id": ObjectId(images_id)},)
-                return render_template("gallery.html", filename=filename, upload_file=upload_file)
-
-
-            if not allowed_image(image.filename):
+                form.populate_obj(user)
+                db.session.commit()
+                flash("imagehas been updated")
+                return redirect(url_for('upload_images'))
+             else: 
                 
-                print("That Image extension is not allowed")
-
-
-            else:
                 filename = secure_filename(image.filename)
-                     
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
                 filename = secure_filename(images.filename)
-                     
                 images.save(os.path.join(app.config["IMAGE_UPLOADS"], images.filename))
-                
                 print("Images saved")
                 return redirect(request.url)
                 return render_template("upload_images.html") 
+
+
 
 @app.route("/gallery")
 def gallery():
@@ -363,56 +349,18 @@ def gallery():
     else:
         return render_template('add-recipes.html', form=form)
     return render_template('add-recipes.html', form=form, action='add')
+ 
 
+@app.route("/upload_folder")
+def upload_folder():
+    try:
+        return database_upload_folder()
+    except DatabaseError as e:
+        app.logger.exception(e)
+        return "Can not upload folder"
 
-@app.route("/upload/<images>", methods=["GET", "POST"])
-def upload(images):
-    if request.method == "POST":
-        submit = {
-            "images": request.form.get("images")
-        }
-        mongo.db.images.update({"_id": ObjectId(images_id)}, submit)
-        flash("imagesSuccessfully Updated")
-        return redirect(url_for("gallery.html"))
-        
-    images = mongo.db.users.find_one({"images": session["user"]})["images"]
-    return render_template("upload.html", images=images)     
-
-@app.route('/upload', methods = ['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return render_template("gallery.html", upload_file=upload_file )
 
 # youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA)
-
-@app.route("/post/<images_id>", methods=["GET", "POST"])
-def post(images_id):
-    if request.method == "POST":
-        submit = {
-            "filename": request.form.get("images")
-        }
-        mongo.db.categories.update({"_id": ObjectId(images_id)}, submit)
-        flash("File Successfully Uploaded")
-        return redirect(url_for("add images"))
-
-    images_id = mongo.db.find({"_id": ObjectId(images_id)})
-    flash("Your image has being uploaded")
-
-    images = mongo.db.images.find_one({"_id": ObjectId(images_id)})
-    return render_template("gallery.html", images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
 
 app.config["ALLOWED_IMAG_EXTENSIONS"] = ["PNG", "JPG", "JPEG" "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 0.5 *1024 *1024
@@ -444,6 +392,34 @@ def images(filename):
 
           filename = mongo.db.filename.find().sort("filename", 1)
           return render_template("images.html", images=images, filename=filename)
+
+@app.route("/get_images")
+def get_images():
+    recipes = list(mongo.db.images.find())
+    return render_template("images.html", images=images)
+
+
+@app.route("/get_images//<search_images>")
+def search_images(search_word):
+    cursor = images.find({'$text': {'$search': search_word}})
+    result = []
+    for data in cursor:
+        result.append(data)
+    return result
+    def convert_result_to_message(result):
+        if len(result) == 0:
+            return "Sorry, we currently don't have any images pertaining to your smoothie."
+    message = ""
+    for data in result:
+        message += f"Food: {data['name']}\n"
+        message += "Steps\n"
+        count = 1
+        for step in data['steps']:
+            message += f"{count}. {step}\n"
+            count += 1
+        message += '\n\n'
+        flash("thank you for your request")
+        return render_template("images.html", images=images)
 
 
 

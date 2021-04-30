@@ -8,72 +8,132 @@
 </head>
 
 <body class="container-fluid">
-    <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('index') }}">
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
+
+    <body>
+
+        <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST"
+            action="{{ url_for('index') }}">
+    </body>
+    <div class="row">
+        <div class="col s12 m12 offset-m2">
+            <div class="card-panel">
+                <h3 class="center-align light-cyan-text text-darken-4"><a href="{{ url_for('index') }}"> Frubbiee
+                        drinks</a>
+
+                </h3>
+            </div>
+
+            <div class="col-md-8 mb-6">
+                <div class="card border-0 shadow">
+                    <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                        class="card-img-top" alt="...">
+                    <div class=" text-center">
+                        <h5 class="card-title mb-0">A Treat</h5>
+                        <div class="card-text text-black-50">Icecream and Mashmallow Smoothie</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Team Member 2 -->
+            <div class=" col-md-8 mb-6">
+                <div class="card border-0 shadow">
+                    <img src="https://images.unsplash.com/photo-1596392301391-e8622b210bd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                        class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">Detox smoothie</h5>
+                        <div class="card-text text-black-50">Pineapple detox smoothie</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-group">
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="{{url_for('static', filename='cherry.jpg')}} alt=" Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This card has even longer content than the first to show that equal height action.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Plot</h4>
+            <button id='images' type="button">Click Me!</button>
+            <div id="img"></div>
+            <div class="col-sm-6">
+                <h2>Select file(s) to upload</h2>
+                <p>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endwith %}
+                </p>
+                <form method="post" action="/static/css/images" enctype="multipart/form-data">
+                    <dl>
+                        <p>
+                            <input type="file" name="files[]" multiple="true" autocomplete="on" required>
+                        </p>
+                    </dl>
+                    <p>
+                        <button type="submit" class="btn-medium light-cyan darken-1 text-shadow">
+                            add image<i class="fas fa-edit right"></i>
+                        </button>
+                    </p>
+                </form>
+            </div>
+        </div>
 </body>
-<div class="row">
-    <div class="col s12 m12 offset-m2">
-        <div class="card-panel">
-            <h3 class="center-align light-cyan-text text-darken-4"><a href="{{ url_for('index') }}"> Frubbiee drinks</a>
 
-            </h3>
-        </div>
+<script>
+    $(document).ready(function () {
+        $('#myButton').click(function () {
+            $.ajax({
+                type: "get",
+                url: "/foo",
+                dataType: "image"
+                success: function (response) {
+                    $("#img").html(response.html);
+                }
+            });
+        });
+    });
+</script>
 
-        <div class="col-md-8 mb-6">
-            <div class="card border-0 shadow">
-                <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                    class="card-img-top" alt="...">
-                <div class=" text-center">
-                    <h5 class="card-title mb-0">A Treat</h5>
-                    <div class="card-text text-black-50">Icecream and Mashmallow Smoothie</div>
-                </div>
-            </div>
-        </div>
-        <!-- Team Member 2 -->
-        <div class=" col-md-8 mb-6">
-            <div class="card border-0 shadow">
-                <img src="https://images.unsplash.com/photo-1596392301391-e8622b210bd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                    class="card-img-top" alt="...">
-                <div class="card-body text-center">
-                    <h5 class="card-title mb-0">Detox smoothie</h5>
-                    <div class="card-text text-black-50">Pineapple detox smoothie</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card-group">
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="{{url_for('static', filename='cherry.jpg')}} alt=" Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-</div>
-
+</html>
 {% endblock %}

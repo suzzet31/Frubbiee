@@ -5,7 +5,7 @@
 <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('images') }}">
 </card-body>
 <ul class="collapsible">
-    {% for images in images %}
+    {% for filename in filename %}
     <li>
         <div class="collapsible-header white-text    teal lighten-3 text-shadow">
             <div class="col s3">
@@ -41,15 +41,46 @@
                 <label class="custom-file-label grey lighten-4" for="image">Select image...</label>
             </div>
         </div>
-        <button href="{{url_for('upload_images') }}" class="cyan btn btn-outline-blue"
+        <button href="{{url_for('get_images', images_id=images._id)  }}" class="cyan btn btn-outline-blue"
             type="submit">upload-image</button>
     </form>
     <hr>
-    <image src="{{url_for('static',filename = 'images/download.jpg')}}">
+    <image src="{{url_for('static',filename = 'static/css/images')}}">
         <!--filename  = "path of your image in in static folder"-->
         </div>
         </div>
-        {% endfor %}
-</ul>
+        <div class="col">
+            <h1>Upload image</h1>
+            <form action="/upload-image" method="POST" enctype="multipart/form-data">
 
+                <div class="form-group">
+                    <label class=" black text .5rem"></label>select image</label>
+                    <div class="custom-file">
+                        <input oninput="filename(this);" type="file" class="white-text custom-file-input" name="image"
+                            id="image">
+                        <label class="custom-file-label grey lighten-4" for="image">Select image...</label>
+                    </div>
+                </div>
+                <button href="{{url_for('upload') }}" class="cyan btn btn-outline-blue"
+                    type="submit">upload-image</button>
+            </form>
+            <hr>
+            <image src="{{url_for('static',filename ='static/css/images')}}">
+                <!--filename  = "path of your image in in static folder"-->
+        </div>
+        </div>
+
+
+
+        <script>
+            function filesize(elem) {
+
+                document.cookie = `filesize = ${elem.files[0].size}`;
+            }
+        </script>
+
+
+
+</ul>
+{% endfor %}
 {% endblock %}

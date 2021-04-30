@@ -27,7 +27,7 @@
     {% block title%}Frubbiee Drinks{% endblock%}
 
 </head>
-{% block head %}
+
 background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
 
 
@@ -48,14 +48,13 @@ background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
                     <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
                     <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                     <li><a href="{{ url_for('add_recipes') }}">New Recipes</a></li>
-                    <li><a href="{{ url_for('upload_images') }}">Upload images</a></li>
                     {% if session.user|lower == "admin"|lower %}
                     <li><a href="{{ url_for('get_categories') }}">Manage drink Categories</a></li>
-                    <li><a href="{{ url_for('upload.html') }}">Uploads</a></li>
-                    <li><a href="{{ url_for('images.html') }}">Images</a></li>
+                    <li><a href="{{ url_for('upload') }}">Uploads</a></li>
+                    <li><a href="{{ url_for('images') }}">Images</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                    <li><a href="{{ url_for('images') }}">Post</a></li>
+                    <li><a href="{{ url_for('get_images') }}">Post</a></li>
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %}
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -76,14 +75,14 @@ background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
             <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             <li><a href="{{ url_for('add_recipes') }}">New Task</a></li>
-            <li><a href="{{ url_for('upload_images') }}">Manage Categories</a></li>
+            <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
             {% if session.user|lower == "admin"|lower %}
-            <li><a href="{{ url_for('get_categories') }}">Upload images</a></li>
-            <li><a href="{{ url_for('upload.html') }}">Uploads</a></li>
-            <li><a href="{{ url_for('images.html') }}">images</a></li>
+            <li><a href="{{ url_for('get_categories') }}">Manage drink Categories</a></li>
+            <li><a href="{{ url_for('upload') }}">Uploads</a></li>
+            <li><a href="{{ url_for('images') }}">images</a></li>
             {% endif %}
             <li><a href="{{ url_for('contact') }}">Contact</a></li>
-            <li><a href="{{ url_for('images') }}">Post</a></li>
+            <li><a href="{{ url_for('get_images') }}">Post</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -91,9 +90,7 @@ background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
             {% endif %}
         </ul>
         </header>
-        {% endblock %}
-        {% block content %}
-        {% block main%}
+
 
         <section>
             <!-- flash messages -->
@@ -107,7 +104,7 @@ background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
             {% endif %}
             {% endwith %}
         </section>
-
+        {% block content %}
         <main class="container">
 
         </main>
@@ -118,7 +115,7 @@ background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
                 </footer>
             </blockquote>
         </div>
-        {% endblock %}
+
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
             integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -141,5 +138,4 @@ background-image: url("{{ url_for('static', filename='smoothie.jpg') }}");
 </body>
 
 </html>
-
 {% endblock %}
