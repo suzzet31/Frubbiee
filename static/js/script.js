@@ -2,14 +2,13 @@
     jQuery for MaterializeCSS initialization
 */
 
+
 $(document).ready(function () {
     $(".sidenav").sidenav({
         edge: "right"
     });
-    $('input#input_text, textarea#textarea2').characterCounter();
     $(".collapsible").collapsible();
     $(".tooltipped").tooltip();
-    $('.materialboxed').materialbox();
     $("select").formSelect();
     $(".datepicker").datepicker({
         format: "dd mmmm, yyyy",
@@ -20,10 +19,6 @@ $(document).ready(function () {
         }
     });
 
-    function filesize(elem) {
-
-        document.cookie = `filesize = ${elem.files[0].size}`;
-    }
     validateMaterializeSelect();
 
     function validateMaterializeSelect() {
