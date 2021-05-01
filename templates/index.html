@@ -7,80 +7,71 @@
 
 </head>
 
-<div class="card blue-grey darken-1">
-    <div class="card-content white-text">
+<body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('index') }}">
+    <div class="container">
 
-
-
-
-        <body>
-
-            <card-body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST"
-                action="{{ url_for('index') }}">
-        </body>
         <div class="row">
-            <div class="col s12 m12 offset-m2">
-                <div class="card-panel">
-                    <h3 class="center-align light-cyan-text text-darken-4"><a href="{{ url_for('index') }}">
-                            Frubbiee
-                            drinks</a>
-
-                    </h3>
+            <div class="col-lg-12 col-md-10 mx-auto">
+                <div class="site-heading heading green-text col-lg-12 col-md-12 mx-auto left">
+                    <h1><strong>Frubbiee Smoothies and fresh juicy Drinks</strong></h1>
+                    <span class="subheading"><em>fresh taste</em></span>
                 </div>
-
-
-                <div class="row">
-                    <div class="col s12 m6">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Card Title</span>
-                                <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">This is a link</a>
-                                <a href="#">This is a link</a>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                        </p>
+                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                Title</cite>
+                        </footer>
+                        <div class="col-md-12 mb-6">
+                            <div class="card border-0 shadow">
+                                <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                    class="card-img-top" alt="...">
+                                <div class=" text-center">
+                                    <h5 class="card-title mb-0">Ice-Cream and marshmallow smoothie</h5>
+                                    <div class="card-text text-black-50">Considered as a treat</div>
+                                    <p> How to make the smoothie:</p>
+                                    On a foil-lined baking sheet,
+                                    toast marshmallows under a broiler, turning as necessary, until all sides are golden
+                                    brown.
+                                    Just as the marshmallows are finishing up, put ice cream and milk in the blender.
+                                    Pour shake into a glass and top with some whipped cream and some crushed graham
+                                    crackers.
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </blockquote>
                 </div>
-                <div class="row">
-                    <div class="col s12 m6">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
 
-                                <div class="indeterminate"></div>
-                            </div>
-                            <span class="card-title">Card Title</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                                I am convenient because I require little markup to use effectively.</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                        </div>
-                    </div>
-                </div>
-                </body>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <h1 class="my-4">Drinks categories</h1>
+        <div class="list-group">
+            <a class="list-group-item" href="#!">Fruit Drinks </a>
+            <a class="list-group-item" href="#!">Green Drink</a>
+            <a class="list-group-item" href="#!">Detox Drinks</a>
+        </div>
+    </div>
 
-                <script>
-                    $(document).ready(function () {
-                        $('#myButton').click(function () {
-                            $.ajax({
-                                type: "get",
-                                url: "/foo",
-                                dataType: "image"
-                                success: function (response) {
-                                    $("#img").html(response.html);
-                                }
-                            });
-                        });
-                    });
-                </script>
 
-                </html>
-                {% endblock %}
+
+    <script>
+        $(document).ready(function () {
+            $('#myButton').click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/foo",
+                    dataType: "image"
+                    success: function (response) {
+                        $("#img").html(response.html);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+{% endblock %}
