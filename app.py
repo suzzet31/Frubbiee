@@ -410,6 +410,13 @@ def images(filename):
 def get_images():
     recipes = list(mongo.db.images.find())
     return render_template("images.html", images=images)
+    
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/get_images//<search_images>")
