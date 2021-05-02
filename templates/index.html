@@ -1,104 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="overlay"></div>
+<body class="masthead "
+    style="background-image: url('https://images.unsplash.com/photo-1553530666-6f3b8750f57b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80')">
+    <div class="blockquote mb-0">
+        <div class="overlay">
+            <!-- top navbar -->
 
 
-<!-- top navbar -->
-
-<div class="row">
-    <header class="masthead col-lg-12 col-md-10 mx-auto"
-        style="background-image: url('https://images.unsplash.com/photo-1553530666-6f3b8750f57b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80')">
-
-    </header>
-    <div class="overlay">
-
-        <div class="row">
-            <div class="row card-panel grey lighten-5">
-                <col action="{{ url_for('search') }}" method="post" class="col s12">
-                <div class="row valign-wrapper center-align">
-                    <div class="input-field col s12 m8">
-                        <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
-                        <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                        <label for="query">Search Recipes</label>
-                    </div>
-                    <div class="col s12 m6">
-                        <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
-                        <button type="submit" class="light-blue darken-1 btn text-shadow">
-                            <i class="fas fa-search left"></i> Search
-                        </button>
-                    </div>
-                </div>
-                <div>
-                </div>
-
-            </div>
 
         </div>
     </div>
-    </col>
-</div>
-</div>
-
-<body class="col s12 m8 offset-m2m8 offset-m2 cyan lighten-5" method="POST" action="{{ url_for('index') }}">
-    <div class="container">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-        </p>
-        <fieldset class="blockquote-footer">Someone famous in <cite title="Source Title">Source
-                Title</cite>
-        </fieldset>
-        <div class="col-md-12 mb-6">
-            <div class="card border-0 shadow">
-                <img src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                    class="card-img-top" alt="...">
-                <div class=" text-center">
-                    <h5 class="card-title mb-0">Ice-Cream and marshmallow smoothie</h5>
-                    <div class="card-text text-black-50">Considered as a treat</div>
-                    <p> How to make the smoothie:</p>
-                    On a foil-lined baking sheet,
-                    toast marshmallows under a broiler, turning as necessary, until all sides are
-                    golden
-                    brown.
-                    Just as the marshmallows are finishing up, put ice cream and milk in the
-                    blender.
-                    Pour shake into a glass and top with some whipped cream and some crushed graham
-                    crackers.
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    </div>
-    </div>
-    </header>
-    </div>
-</body>
-<div class="col-lg-3">
-    <h1 class="my-4">Drinks categories</h1>
-    <div class="list-group">
-        <a class="list-group-item" href="#!">Fruit Drinks </a>
-        <a class="list-group-item" href="#!">Green Drink</a>
-        <a class="list-group-item" href="#!">Detox Drinks</a>
-    </div>
-</div>
 
 
-
-<script>
-    $(document).ready(function () {
-        $('#myButton').click(function () {
-            $.ajax({
-                type: "get",
-                url: "/foo",
-                dataType: "image",
-                function (response) {
-                    $("#img").html(response.html);
-                }
+    <script>
+        $(document).ready(function () {
+            $('#myButton').click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/foo",
+                    dataType: "image",
+                    function (response) {
+                        $("#img").html(response.html);
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
+
 </body>
 
 </html>

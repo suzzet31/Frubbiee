@@ -3,29 +3,24 @@ import pymongo
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, 
-    send_from_directory, jsonify, make_response, send_file)
-from datetime import datetime
+    send_from_directory, make_response, send_file)
+from flask_admin import Admin   
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
 if os.path.exists("env.py"):
     import env
 
 
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
 
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
-
-
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-mydb = myclient["mydatabase"]
-mycol = mydb["customers"]
 
 
 
@@ -35,8 +30,8 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/index")
 def index():
-    index = list(mongo.db.index.find())
-    return render_template("index.html", index=index )
+        index = list(mongo.db.index.find())
+        return render_template("index.html", index=index )
 
 
 @app.route("/get_recipes")
@@ -45,27 +40,11 @@ def get_recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("/get_recipes//<search_recipe>")
-def search_recipe(search_word):
-    cursor = recipes.find({'$text': {'$search': search_word}})
-    result = []
-    for data in cursor:
-        result.append(data)
-    return result
-    def convert_result_to_message(result):
-        if len(result) == 0:
-            return "Sorry, we currently don't have any recipe pertaining to your smoothie."
-    message = ""
-    for data in result:
-        message += f"Food: {data['name']}\n"
-        message += "Steps\n"
-        count = 1
-        for step in data['steps']:
-            message += f"{count}. {step}\n"
-            count += 1
-        message += '\n\n'
-        flash("thank you for your request")
-        return render_template("recipes.html", recipes=recipes)
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/register")
@@ -84,6 +63,7 @@ def register():
             "password": generate_password_hash(request.form.get("password"))
         }
         mongo.db.users.insert_one(register)
+    
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
@@ -207,9 +187,7 @@ def add_category():
         flash("New Category Added")
         return redirect(url_for("get_categories"))
 
-
-        return render_template("add_category.html")
-
+    return render_template("add_category.html")
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
@@ -225,173 +203,75 @@ def edit_category(category_id):
     return render_template("edit_category.html", category=category)
 
 
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    if request.method =="POST":
-        flash("Thanks {}, we have received your message!".format(
-        request.form.get("name")))
-        mongo.db.recipes.remove({"_id": ObjectId(posts_id)})
-    flash("Your message has being sent")
-    return render_template("contact.html", page_title="Contact")
 
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-
-@app.route('/', methods=['POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the files part
-        if 'files[]' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        files = request.files.getlist('files[]')
-        for file in files:
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash('Files successfully uploaded')
-        return redirect('/')
-
+@app.route("/delete_category/<category_id>")
+def delete_category(category_id):
+    mongo.db.categories.remove({"_id": ObjectId(category_id)})
+    flash("Category Successfully Deleted")
+    return redirect(url_for("get_categories"))
 
 
 # stackflow  
 
 
-@app.route("/upload/<images>", methods=["GET", "POST"])
-def upload(images):
-    if request.method == "POST":
-        submit = {
-            "images": request.form.get("filename")
-        }
-        # check if the post request has the file part
-        if 'images' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        images = request.files['filename']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if images.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(images.filename):
-            filename = secure_filename(images.filename)
-            file.save(os.path.join(app.config['upload_folder'], filename))
-            return render_template("upload.html",upload=upload, upload_file=upload_file , images = images )
-    
-        mongo.db.images.update({"_id": ObjectId(filename_id)}, submit)
-        flash("images Successfully Updated")
-        return redirect(url_for("gallery.html"))
-        
-    images = mongo.db.users.find_one({"images": session["user"]})["images"]
-    return render_template("upload.html", images=images)    
-
 
 @app.route("/gallery")
 def gallery():
-    images = os.listdir('static/images')
-    if request.method == "POST":
-        images = {
-            "filename": request.form.get("images")
-        }
-        mongo.db.images.select( upload_images)
-        flash("File Successfully Uploaded")
-        return redirect(url_for("filename"))
+        images = os.listdir('static/images')
+        if request.method == "POST":
+            images = {
+                "filename": request.form.get("filename")
+            }
+            mongo.db.images.select( upload_images)
+            flash("File Successfully Uploaded")
+            return redirect(url_for("filename"))
 
-    filename = mongo.db.filename.find_one()
-    return render_template("gallery.html", filename=filename, upload_file=upload_file)
-
-    print(images)
-    return render_template("gallery.html", images=images)
-    form = AddRecipe()
-    user = User.query.filter_by(id=current_user.id).first()
-    imagesList = []
-
-    if request.method == 'POST' and 'image[]' in request.files:
-        if form.validate_on_submit():
-            product = recipe()
-            file = request.files.getlist("image[]")
-            for zipfile in file:
-                filename = zipfile.filename.split('/')[0]
-                zipfile.save(os.path.join(UPLOAD_FOLDER, filename))
-                imagesList.append(filename)
-
-            product.images = imagesList[imagesList]
-            db.session.add(image)
-            db.session.commit()
-
-            flash('Images Uploaded', 'success')
-            return redirect(url_for('master.index'))
-
-    else:
-        return render_template('add-recipes.html', form=form)
-    return render_template('add-recipes.html', form=form, action='add')
- 
+        filename = mongo.db.filename.find_one()
+        return render_template("gallery.html", filename=filename)
 
 
 
-# youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA)
 
 
+    # youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA)
 
-@app.route("/images")
-def images(filename):
-    return send_from_directory("/images", filename=filename)
 
 app.route("/images/<filename>")
 def images(filename):
-        if request.method =="POST":
-          like = "on" if request.form.get("like") else "off"
-          filename = {
+    if request.method =="POST":
+        like = "on" if request.form.get("like") else "off"
+        filename = {
             "images.filename": request.form.get("filename"),
             "images.comment": request.form.get("commentt"),
             "images.like": like,
             "created_by":session["user"]
-            }
-          mongo.db.images.upload({"_id": ObjectId(images_id)}, filename)
-          flash("Image Successfully uploaded")
+        }
 
-          filename = mongo.db.filename.find().sort("filename", 1)
-          return render_template("images.html", images=images, filename=filename)
+        mongo.db.images.upload({"_id": ObjectId(images_id)}, filename)
+        flash("Image Successfully uploaded")
 
-@app.route("/get_images")
-def get_images():
-    recipes = list(mongo.db.images.find())
-    return render_template("images.html", images=images)
-    
-
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    query = request.form.get("query")
-    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    return render_template("recipes.html", recipes=recipes)
+        filename = mongo.db.filename.find().sort("filename", 1)
+        return render_template("images.html", images=images, filename=filename)
 
 
-@app.route("/get_images//<search_images>")
-def search_images(search_word):
-    cursor = images.find({'$text': {'$search': search_word}})
-    result = []
-    for data in cursor:
-        result.append(data)
-    return result
-    def convert_result_to_message(result):
-        if len(result) == 0:
-            return "Sorry, we currently don't have any images pertaining to your smoothie."
-    message = ""
-    for data in result:
-        message += f"Food: {data['name']}\n"
-        message += "Steps\n"
-        count = 1
-        for step in data['steps']:
-            message += f"{count}. {step}\n"
-            count += 1
-        message += '\n\n'
-        flash("thank you for your request")
-        return render_template("images.html", images=images)
-
-
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',filename=filename))
+        return render_template("gallery.html")
 
 
 if __name__ == "__main__":
