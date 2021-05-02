@@ -7,17 +7,12 @@ from flask import (
 from datetime import datetime
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from jinja2 import Template
-from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 if os.path.exists("env.py"):
     import env
 
-
-UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 app = Flask(__name__, static_url_path='')
@@ -260,38 +255,9 @@ def upload_file():
         flash('Files successfully uploaded')
         return redirect('/')
 
-@app.route('/foo', methods=['GET'])
-def foo():
-    for root, dirs, files in os.walk(app.config['UPLOAD_FOLDER']):
-        for file in files:
-            if file.endswith('B4.TIF'):
-                fname4 = os.path.join(app.config['UPLOAD_FOLDER'], file)
-            if file.endswith('B5.TIF'):
-                fname5 = os.path.join(app.config['UPLOAD_FOLDER'], file)
-
-    bytes_obj = plot(fname4,fname5)
-
-    return send_file(bytes_obj,
-                     attachment_filename='plot.png',
-                     mimetype='image/png')
 
 
 # stackflow  
-
-@app.route("/""/<filename_local>")
-def myfiles(filename_local):
-    return send_from_directory("/index", filename_local)
-
-    
-@app.route('/uploads/<path:filename>')
-def download_file(filename):
-    return send_from_directory(directory_to_image_folder, filename, as_attachment=True)
-
-
-@app.route("/send_file/<filename>")
-def send_file(filename):
-   return send_from_directory(app.config["UPLOAD_FOLDER"] +"/" + getFolder(filename) , getImageName(filename))
-
 
 
 @app.route("/upload/<images>", methods=["GET", "POST"])
@@ -364,27 +330,11 @@ def gallery():
     return render_template('add-recipes.html', form=form, action='add')
  
 
-@app.route("/upload_folder")
-def upload_folder():
-    try:
-        return database_upload_folder()
-    except DatabaseError as e:
-        app.logger.exception(e)
-        return "Can not upload folder"
 
 
 # youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA)
 
-app.config["ALLOWED_IMAG_EXTENSIONS"] = ["PNG", "JPG", "JPEG" "GIF"]
-app.config["MAX_IMAGE_FILESIZE"] = 0.5 *1024 *1024
 
-def allowed_image(filename):
-
-    if not "." in filename:
-        def allowed_image_filesize(filesize):
-             if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
-                 return render_template("gallery.html", images=images, upload_file=upload_file)@app.route("/register", methods=["GET", "POST"])
- 
 
 @app.route("/images")
 def images(filename):
