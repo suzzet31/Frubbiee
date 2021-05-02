@@ -152,7 +152,7 @@ def edit_recipes(recipes_id):
             "smoothie_name": request.form.get("smoothie_name"),
             "recipe_description": request.form.get("recipe_description"),
             "type_of_equipments": request.form.get("type_of_equipments"),
-            "pre_time": request.form.get("pre_time"),
+            "prep_time": request.form.get("prep_time"),
             "my_favourite": my_favourite,
             "created_by":session["user"]
          }

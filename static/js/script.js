@@ -18,7 +18,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#myButton').click(function () {
+    $('#myButton').cursor(function () {
         $.ajax({
             type: "get",
             url: "/foo",
@@ -28,36 +28,34 @@ $(document).ready(function () {
             }
         });
     });
-});
-$("button").click(function () {
-    $("navbar").toggleClass("blue");
-});
-$(newFunction()).css("background-color", "yellow");
+
+    $("button").button(function () {
+        $("navbar").toggleClass("blue");
+    });
+    $(newFunction()).css("background-color", "yellow");
 
 
 
-function newFunction() {
-    return "body";
-}
-$("nav").toggleClass();
-
-$("input[type='text']").onclick("any", function () {
-    if (!this.value) {
-        alert("Please enter some text!");
+    function newFunction() {
+        return "body";
     }
-});
+    $("input[type='text']").onclick("any", function () {
+        if (!this.value) {
+            alert("Please enter some text!");
+        }
+    });
 
-var input = $("input:image").css({
-    background: "teal",
-    border: "3px green solid"
+    var input = $("input:image").css({
+        background: "teal",
+        border: "3px green solid"
+    });
+    $("div")
+        .text(+input.length + ".")
+        .css("color", "red");
+    $("form").input(function (event) {
+        event.preventDefault();
+    });
 });
-$("div")
-    .text(+input.length + ".")
-    .css("color", "red");
-$("form").submit(function (event) {
-    event.preventDefault();
-});
-
 
 
 validateMaterializeSelect();
