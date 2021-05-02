@@ -2,8 +2,35 @@
 A online recipe platform
 
 ## table of content
-Getting Started
 These platform will get you a ideas on how to create fresh smoothie reipes and drinks that you can share with the community.
+
+
+
+
+
+
+
+## To get Started
+
+## For Developers
+ Code can be written in any IDE platform 
+
+To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+
+`python3 -m http.server`
+
+A blue button should appear to click: _Make Public_,
+
+Another blue button should appear to click: _Open Browser_.
+
+To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+
+A blue button should appear to click: _Make Public_,
+
+Another blue button should appear to click: _Open Browser_.
+
+In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+
 
 ### Prerequisites
 What things you need to install the software and how to install them
@@ -14,6 +41,7 @@ Installing
 A step by step series of examples that tell you how to get a development env running
 
 Say what the step will be
+## CRUD
 
 ### Give the example
 And repeat
