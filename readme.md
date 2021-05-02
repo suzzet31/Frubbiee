@@ -7,7 +7,8 @@ These platform will get you a ideas on how to create fresh smoothie reipes and d
 
 ### Prerequisites
 What things you need to install the software and how to install them
-
+### wireframe
+[Frubbiee wireframe.pdf](https://github.com/suzzet31/Frubbiee/files/6412367/Frubbiee.wireframe.pdf)
 ###  Give examples
 Installing
 A step by step series of examples that tell you how to get a development env running
