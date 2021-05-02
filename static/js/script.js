@@ -18,7 +18,16 @@ $(document).ready(function () {
             done: "Select"
         }
     });
-
+    $('#myButton').click(function () {
+        $.ajax({
+            type: "get",
+            url: "/foo",
+            dataType: "image",
+            function (response) {
+                $("#img").html(response.html);
+            }
+        });
+    });
     validateMaterializeSelect();
 
     function validateMaterializeSelect() {
