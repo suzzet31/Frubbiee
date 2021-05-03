@@ -1,9 +1,11 @@
-## Frubbiee 
-A online recipe platform
+# Frubbiee 
 
-## table of content
+Description
+-------------
+
+A online fresh smoothie and juice recipe platform. 
+
 These platform will get you a ideas on how to create fresh smoothie reipes and drinks that you can share with the community.
-
 
 
 ## Table of content
@@ -137,11 +139,13 @@ You will be directed back to the settings page on the top of the page select the
 ### Prerequisites
 
 What things you need to install the software and how to install them
-<<<<<<< HEAD
+
 ### wireframe
 [Frubbiee wireframe.pdf](https://github.com/suzzet31/Frubbiee/files/6412367/Frubbiee.wireframe.pdf)
 Using the (mockflow website) [https://www.mockflow.com/app/#Wireframe]
+
 ###  Give examples
+
 Installing
 =======
 To create a base template we need to install diffrent python functionalities to create a CRUD working platform.
@@ -154,8 +158,6 @@ To do this we need to install.
 * create echo : web requirement.txt
 * External API 
 
-
->>>>>>> 4e9a26b3cc642d22288b904af6487a32d9c7946f
 A step by step series of examples that tell you how to get a development env running
 *  
 ### create app.py using python flask framework and Materialize 
