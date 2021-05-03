@@ -6,19 +6,23 @@ These platform will get you a ideas on how to create fresh smoothie reipes and d
 
 
 
-
-
-
-
-## To get Started
-
 ## Table of content
 ---------------
 * Description
-* 
-*
-
-*
+* For developers
+* Wireframe
+* Create Mongodb account
+* Create Heroku account
+* Prerequisites
+* create app.py using python flask framework and Materialize
+* CRUD (create/read/upadate and delete)
+* pages
+* Running the tests
+* Code languages used 
+* Deployment
+* Built With
+* Media
+* Acknowledgments
 
 ## For Developers
  Code can be written in any IDE platform 
@@ -173,19 +177,13 @@ Create a base template we need to install diffrent python functionalities to cre
   
  The below functionality are accessible inthe following pages
  
- *create recipe in the new recipe page 
- *read page the recipe(frubbiee page)
- *update recipes/category pages by using the edit/cancel butons
- *delete pages/categories/recipes using the delete functionalities in the cancle and done button
+ * Create recipe in the new recipe page 
+ * Read page the recipe(frubbiee page)
+ * Update recipes/category pages by using the edit/cancel butons
+ * Delete pages/categories/recipes using the delete functionalities in the cancle and done button
 
 
 When a user submits an edit task form, they are sending their updated task data to the database
-
-### Give the example
-And repeat
-
-### until finished
-End with an example of getting some data out of the system or using it for a little demo
 
 ### Running the tests
 To run the automated tests for this system
@@ -203,10 +201,10 @@ And coding style tests
  in app.py , add code to import Flask and create an instance of the Flask object. Using the correct packages using the 
  the __name__ variable.
  Language used are. 
- * HTML
- * CSS
- * Javascript
- * Python Flask
+ * ` ``HTML
+ * ```CSS
+ * ```Javascript
+ * `Python Flask
  
  
 Explain what these tests test and why
@@ -215,6 +213,7 @@ Give an example
 --------------------
 ### Deployment
 Add additional notes about how to deploy this on a live system
+
 
 ### Built With
 
