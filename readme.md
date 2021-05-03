@@ -133,12 +133,8 @@ You will be directed back to the settings page on the top of the page select the
 * Once you connected to your github  account, select your repository to connect.
 * Once coonected select enable automatic deployment button then give it a few munites to connect and collect data to the heroku cloud.  
 * This takes a few minutes. Once it is done your will receive a message to state whether your site is enabled and deployed . 
-*
 
 
-### Prerequisites
-
-What things you need to install the software and how to install them
 
 ### wireframe
 [Frubbiee wireframe.pdf](https://github.com/suzzet31/Frubbiee/files/6412367/Frubbiee.wireframe.pdf)
@@ -211,19 +207,34 @@ And coding style tests
  in app.py , add code to import Flask and create an instance of the Flask object. Using the correct packages using the 
  the __name__ variable.
  Language used are. 
- * ` ``HTML
- * ```CSS
- * ```Javascript
+ * `HTML
+ * `CSS
+ * `Javascript
  * `Python Flask
  
- 
-Explain what these tests test and why
 
-Give an example
---------------------
 ### Deployment
 Add additional notes about how to deploy this on a live system
 
+Run the python3 app.py command. 
+
+After adding the git add and git commit command, push your code to your repository's
+github master or main branch or to your heroku remote master. 
+
+* To deploy your app to Heroku. 
+
+* Within our terminal we need to log from the CLI and then add heroku commands to access different pieces of functionality by
+going back to the full-width Terminal and install Heroku,
+
+* Type: npm install -g heroku.
+
+* Once that finishes installing, we can login to Heroku using the command: heroku login -i.
+
+* Use your heroku logins details that is created to access  Heroku account  . 
+
+* Type: heroku apps: 
+
+ * The first URL there is our live  link you use to for deployment.
 
 ### Built With
 
@@ -274,16 +285,37 @@ Import flask os links that are used
 *  environ
 
 
-
-
 Media
 ------------
+* Google media  select tools button under usage rights select any of the 
+
+ - Creative Commons licenses
+ - Commercial & other licenses 
+
+   * [https://images.unsplash.com/photo-1589734580748-6d9421464885?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8c21vb3RoaWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60]
+                
+   * [https://media.istockphoto.com/photos/healthy-appetizing-red-smoothie-dessert-in-glasses-picture-id1081369140?k=6&m=1081369140&s=612x612&w=0&h=FQaF-nWUJ4nO0H-k5lrlNj1SGloF4SnDePTxdDSRUds=]
+             
+   * [https://images.immediate.co.uk/production/volatile/sites/30/2020/08/3._healthy_ingredients_for_smoothie-b0c5bd6.jpg?quality=90&resize=960,872]
+
+                   
+   * [https://media.istockphoto.com/photos/raspberry-smoothies-and-raspberry-fruit-on-the-concrete-background-picture-id1165901530?k=6&m=1165901530&s=612x612&w=0&h=lTD1JB_C1TKA0yQ2GszOKx6AXC9GMEAROqNdJ1B3CZQ=]
 
 
-Acknowledgments
+* And unsplashed images
+ 
+                   
+ [https://images.unsplash.com/photo-1553530666-ba11a7da3888?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c21vb3RoaWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60]
+
+ Acknowledgments
 -------------------
 Hat tip to anyone whose code was used
-* stackflow  
+* The code institute tutorial by `Mr. Tim Nelson`
+* All the code institute tutors 
+*  [Mr. Can Casullu]  My mentor thankj you for putting up with me
+* The care support team especially [Mark] who has always there to recieve my calls.
+* Tutor team
+* stackflow 
 * youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA
 Inspiration
 etc
