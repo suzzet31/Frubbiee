@@ -8,13 +8,13 @@
         action="{{ url_for('get_recipes', recipes_id=recipes._id) }}">
         <!-- category selection -->
         <div class="row">
-            <div class="col s3">
+            <div class="col s12">
                 <i class="fas fa-caret-down"></i>
                 {% if session.user|lower == recipes.create_by|lower %}
                 <a href="{{ url_for('edit_recipes',recipes_id=recipes._id)  }}" class=" btn-small teal lighten">Edit</a>
                 {% endif %}
             </div>
-            <div class="col s9">
+            <div class="col s12">
                 <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
                 {% if recipes.my_favourite == "on" %}
                 <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
@@ -109,14 +109,10 @@
             <!-- submit button -->
             <div class="row">
                 <div class="col s12 center-align">
-                    <!-- cancel button -->
-                    <button type="submit" class="btn-medium light-cyan darken-1 text-shadow">
-                        Edit Recipe<i class="fas fa-edit right"></i>
+                    <button type="submit" class="btn-large light-teal darken-1 text-shadow">
+                        Add Recipe <i class="fas fa-plus-square right"></i>
                     </button>
                 </div>
-                <a href="{{ url_for('get_recipes')}}" class="btn-btn-medium red text-shadow">
-                    Cancel <i class="fas fa-times-circle right"></i>
-                </a>
             </div>
     </form>
 </div>

@@ -21,6 +21,7 @@ body {
 
 }
 
+
 .navbar {
     display: inline-flexbox;
     display: inline-flexbox;
@@ -47,7 +48,7 @@ text {
 }
 
 .background,
-.overlay {
+    {
     background-image: url('https://images.unsplash.com/photo-1553530666-6f3b8750f57b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80');
 
 }
@@ -89,4 +90,64 @@ h4;
 p {
     margin: 0;
     color: #142221;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: centre;
+    width: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+text {}
+
+ul {
+    margin: 12px;
+    padding: 10px;
+    text-size-adjust: 1.5rem;
+    float: right;
+}
+
+li {
+    width: 25px;
+
+}
+
+ul li {
+    margin-left: 5px;
+    padding-top: 5px;
+
+}
+}
+
+.sidenav {
+    color: rgba(0, 0, 0, 0.87);
+    display: block;
+    font-size: 19px;
+    font-weight: 50rem;
+    line-height: initial;
+    padding: inherit;
+}
+
+li.collection-item {
+    text-decoration: none;
+    letter-spacing: 15px;
+    font-size: 14px;
+    display: list-item;
+    list-style: none;
+    margin: 0;
+    font-weight: lighter;
+    color: #cfc8f8;
 }

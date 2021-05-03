@@ -68,7 +68,13 @@ Add additional notes about how to deploy this on a live system
 ### Mongodb
 ### Heroku
 
+## trouble shooting
 
+* Kept on getting the favicon.ico HTTP/1.1" 404. 
+I did a serach on stackover flow and nside head tag I added the 
+
+`<link href='ico/favicon.ico' rel='icon'>` link
+ 
 Installed 
 -------------
 <!-- pip3 install  -->
