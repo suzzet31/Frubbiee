@@ -32,7 +32,7 @@
                 <ul class="right hide-on-med-and-down">
 
                     <li><a href="{{ url_for('index') }}">Home</a></li>
-                    <li><a href="{{ url_for('get_recipes') }}">Frubbiee</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}">Frubbiee Recipes</a></li>
                     <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
                     {% if session.user %}
                     <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
@@ -52,7 +52,7 @@
     <!-- mobile sidenav -->
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{ url_for('index') }}">Home</a></li>
-        <li><a href="{{ url_for('get_recipes') }}">Frubbiee </a></li>
+        <li><a href="{{ url_for('get_recipes') }}">Frubbiee Recipes </a></li>
         <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
         {% if session.user %}
         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
@@ -109,14 +109,28 @@
     {% block scripts %}
     {% endblock %}
     {%  block footer%}
-    <footer class="mb_0">
-        <div class="container ">
-            <div class="row">
-                <div class="col-lg-8 col-md-4 mx-auto">
 
-                    <div class="site-heading green-text col-lg-12 col-md-12 mx-auto left">
+    {% endblock%}
+    <footer class="container">
+        <div class="">
+            <div class="row">
+                <div class="">
+
+                    <div class="green-text centre-align black right-top">
                         <h1><strong>Frubbiee fresh drinks</strong></h1>
-                        <span class="subheading"><em>fresh taste</em></span>
+                        <span class="subheading"><em>fresh taste
+                                <h6 class="lime-text">Create your own fresh drinks.
+
+                                    Frubbiee drinks.
+                                    <ul class="lime-text centre align">
+                                        <li>Fruit drinks</li>
+                                        <li>Detox drinks</li>
+                                        <li>Kids Favourite drinks</li>
+                                        <li>Green smoothies</li>
+                                        <li>Protein shakes</li>
+                                    </ul>
+                                </h6>
+                            </em></span>
                     </div>
 
                     <p class="copyright black row-md-12 b5-col grey text-muted">Copyright &copy;Frubbiee 2020</p>
@@ -124,7 +138,6 @@
             </div>
         </div>
     </footer>
-    {% endblock%}
 
 </body>
 
