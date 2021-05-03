@@ -45,6 +45,7 @@ Frubbiee workflow chart
 [Flowchart (1).pdf](https://github.com/suzzet31/Frubbiee/files/6416110/Flowchart.1.pdf)
 ![Flowchart](https://user-images.githubusercontent.com/82264522/116903116-e29a3a80-ac33-11eb-8f1e-11b3e5ed3979.jpeg)
  Mock up generato page (Multi device mockup generator)[https://techsini.com/multi-mockup/index.php]
+ ![Frubbiee techsini multi-mockup generator](https://user-images.githubusercontent.com/82264522/116922607-85ab7e00-ac4d-11eb-9f62-a52e86d46a11.PNG)
 
 
 * 
