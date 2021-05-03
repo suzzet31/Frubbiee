@@ -2,23 +2,23 @@
 {% block content %}
 <h3 class="light-cyan-text text-darken-4 center-align">Frubbiee drinks</h3>
 
-<div class="row card-panel grey lighten-5">
-    <form action="{{ url_for('search') }}" method="post" class="col s12">
-        <div class="row valign-wrapper center-align">
-            <div class="input-field col s12 m8">
-                <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
-                <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                <label for="query">Search Recipes</label>
-            </div>
-            <div class="col s12 m4">
-                <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
-                <button type="submit" class="light-blue darken-1 btn text-shadow">
-                    <i class="fas fa-search left"></i> Search
-                </button>
-            </div>
-        </div>
-    </form>
+<col class="row-md-12 b5-col black-text">
+<col action="{{ url_for('search') }}" method="post" class="col s12">
+<div class="row valign-wrapper center-align">
+    <div class="input-field col s12 m8">
+        <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
+        <input type="text" name="query" id="query" minlength="3" class="validate" required>
+        <label for="query">Search Recipes</label>
+    </div>
+    <div class="col=8 s12 m4">
+        <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
+        <button type="submit" class="light-blue darken-1 btn text-shadow">
+            <i class="fas fa-search left"></i> Search
+        </button>
+    </div>
 </div>
+</col>
+</col>
 
 <ul class="collapsible">
     {% for recipes in recipes %}
@@ -26,8 +26,8 @@
 
 
     <li>
-        <div class="collapsible-header black-text light-blue darken-4 text-shadow">
-            <div class="col s3">
+        <div class="collapsible-header white-text light-blue darken-4 text-shadow">
+            <div class="col  s3">
                 <i class="fas fa-caret-down"></i>
                 {% if session.user|lower == recipes.created_by|lower %}
                 <a href="{{ url_for('delete_recipes', recipes_id=recipes._id) }}"
@@ -37,25 +37,24 @@
                 {% endif %}
             </div>
             <div class="col s12">
-                <strong>{{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
+                <strong> {{recipes.category_name}}</strong> : <strong>{{recipes.my_favourite}}</strong>
                 {% if recipes.my_favourite == "on" %}
-                <i class="fas fa-exclamation-circle cyan accent-2 text-lighten-2 tooltipped" data-position="right"
+                <i class="fas fa-exclamation-circle cyan accent-2 text-red accent-1 tooltipped" data-position="right"
                     data-tooltip="My favourite"></i>
                 {% endif%}
             </div>
         </div>
         <div class="collapsible-body col-8">
-            <p><strong>{{ recipes.main_ingredient}}</strong></p><br>
-            <strong> {{recipes.smoothie_name}}</strong><br>
-            <p><strong>Ingredients:{{recipes.recipe_description}}</strong></p><br>
-            <p><strong> {{recipes.type_of_equipments}}</strong> </p><br>
-            <p><strong> {{recipes.prep_time}}</strong> </p><br>
+            <p><strong> {{ recipes.main_ingredient}}</strong></p><br>
+            <strong> Name of the drink:</strong> {{recipes.smoothie_name}}<br>
+            <p><strong>Ingredients:</strong>{{recipes.recipe_description}}</strong></p><br>
+            <p><strong>Type of equipments needed:</strong>{{recipes.type_of_equipments}}</strong> </p><br>
+            <p><strong> Prep_time: </strong>{{recipes.prep_time}}</strong> </p><br>
         </div>
 
         <div class="collapsible-body col-8">
-            <strong>{{ recipes.category_name }}</strong>
-            <p>{{ recipes.recipes_description }}</p>
-            <p><em>by: {{ recipes.created_by }}</em></p>
+            <strong> {{ recipes.category_name }}</strong>
+            <p><em>Created by: {{ recipes.created_by }}</em></p>
         </div>
         </div>
     </li>

@@ -236,22 +236,6 @@ def gallery():
     # youtube tutorial with Julian Nash (https://www.youtube.com/channel/UC5_oFcBFlawLcFCBmU7oNZA)
 
 
-app.route("/images/<filename>")
-def images(filename):
-    if request.method =="POST":
-        like = "on" if request.form.get("like") else "off"
-        filename = {
-            "images.filename": request.form.get("filename"),
-            "images.comment": request.form.get("commentt"),
-            "images.like": like,
-            "created_by":session["user"]
-        }
-
-        mongo.db.images.upload({"_id": ObjectId(images_id)}, filename)
-        flash("Image Successfully uploaded")
-
-        filename = mongo.db.filename.find().sort("filename", 1)
-        return render_template("images.html", images=images, filename=filename)
 
 
 @app.route('/', methods=['GET', 'POST'])
