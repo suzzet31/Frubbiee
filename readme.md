@@ -36,6 +36,10 @@ In Gitpod you have superuser security privileges by default. Therefore you do no
 What things you need to install the software and how to install them
 ### wireframe
 [Frubbiee wireframe.pdf](https://github.com/suzzet31/Frubbiee/files/6412367/Frubbiee.wireframe.pdf)
+Frubbiee workflow chart
+[Flowchart (1).pdf](https://github.com/suzzet31/Frubbiee/files/6416110/Flowchart.1.pdf)
+![Flowchart](https://user-images.githubusercontent.com/82264522/116903116-e29a3a80-ac33-11eb-8f1e-11b3e5ed3979.jpeg)
+
 ###  Give examples
 Installing
 A step by step series of examples that tell you how to get a development env running
