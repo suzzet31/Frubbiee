@@ -1,25 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap|100,200,300,400,500,600,700');
 
-
-* {
-    box-sizing: 0;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    list-style-position: flex;
-}
-
-
 .background,
 .overlay {
     background-image: url('https://images.unsplash.com/photo-1553530666-6f3b8750f57b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80');
-
-
 }
 
-/*--------------------mini-task tutorial css*/
+* {
+    box-sizing: content-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    list-style-position: inside;
+}
+
 .text-shadow {
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
 }
 
 .flashes h4 {
@@ -39,17 +34,12 @@ body {
     margin: 0;
     margin-top: 15px;
     margin-bottom: 20px;
-    background-image: no-repeat fixed center;
     background-color: #cccccc;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.846;
-
-
-
-
+    color: black;
 }
-
 
 li.collection-item {
     text-decoration: none;
@@ -61,5 +51,3 @@ li.collection-item {
     font-weight: lighter;
     color: #cfc8f8;
 }
-
-/*-------------------------------------------------------------------------w3school-Autocomplete*/
