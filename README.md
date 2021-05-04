@@ -10,7 +10,8 @@ These platform will get you a ideas on how to create fresh smoothie reipes and d
 
 
 ## Table of content
----------------
+-----------------
+
 * Description
 * For developers
 * Wireframe
@@ -55,7 +56,7 @@ Frubbiee workflow chart
  ![Frubbiee techsini multi-mockup generator](https://user-images.githubusercontent.com/82264522/116922607-85ab7e00-ac4d-11eb-9f62-a52e86d46a11.PNG)
 
 
-* 
+ 
 ## Create Mongodb  account
 
 Creating an Atlas Account — Creating an Atlas Account. First, you'll need to register for a free account on the MongoDB Atlas landing page.
@@ -66,7 +67,6 @@ Creating an Atlas Account — Creating an Atlas Account. First, you'll need to r
   create a database and add its first collection at the same time:
   Click Create Database to open the dialog.
   Enter the name of the database and its first collection.
-*
 
 You use MongoDB Atlas, which is a Database-as-a-Service, to create and host your Database in the cloud that stores unstructured data
 The Databases tab in MongoDB Compass has a Create Database button. In MongoDB Compass, 
@@ -155,17 +155,14 @@ To do this we need to install.
 * create echo : web requirement.txt
 * External API 
 
-A step by step series of examples that tell you how to get a development env running
-*  
+ 
 ### create app.py using python flask framework and Materialize 
-T
+
 Flask allows us to build web apps to use it we need to installl python flask in the ide terminal. that will enable us to create a flask app that is used to create this website
 By creating a base template and using {% extends 'base.html' %} in a child template and closing {% endblock %} after that.
 To refrence the pages in our files that are within our own repository, we must use the url_for() function.
 url_for('static', filename=, and then just the link that's already provided.
 
-
-Say what the step will be
 ## CRUD (create/read/upadate and delete)
 
 Create a base template we need to install diffrent python functionalities to create a CRUD working platform referencing the base templates using the terminal point.
@@ -193,6 +190,7 @@ Create a base template we need to install diffrent python functionalities to cre
 When a user submits an edit task form, they are sending their updated task data to the database
 
 ### Running the tests
+
 To run the automated tests for this system
 I used instant access to our real device cloud using the OS version, through the computer webpage, 
 by selceting the developer inspect property to initiate the page into different respirotory sizes as the  Galaxy, iPhone, Huawei, Pixel, OnePlus, Xiaomi, etc.
@@ -215,11 +213,10 @@ And coding style tests
  
 
 ### Deployment
-Add additional notes about how to deploy this on a live system
 
-Run the python3 app.py command. 
+1.Run the python3 app.py command. 
 
-After adding the git add and git commit command, push your code to your repository's
+2.After adding the git add and git commit command, push your code to your repository's
 github master or main branch or to your heroku remote master. 
 
 * To deploy your app to Heroku. 
@@ -248,19 +245,20 @@ going back to the full-width Terminal and install Heroku,
   Gitpod ide platform
   Github 
   Python flask framework
-  pymomgo
+  Pymomgo
   
 
 ## trouble shooting
 
 * Kept on getting the favicon.ico HTTP/1.1" 404. 
 
-I did a serach on stackover flow and nside head tag I added the 
+I did a search on stackover flow and nside head tag I added the 
 
 `<link href='ico/favicon.ico' rel='icon'>` link
  
 Import flask os links that are used
 -------------
+
 <!-- pip3 install  -->
 *  Flask PyMongo  - The web framework used
 * Mongo db - Dependency Management
@@ -288,7 +286,8 @@ Import flask os links that are used
 
 Media
 ------------
-* Google media  select tools button under usage rights select any of the 
+
+* My images were picked from the Google media select tools button under usage rights select under the below links:
 
  - Creative Commons licenses
  - Commercial & other licenses 
@@ -307,17 +306,18 @@ Media
 * [unsplash][https://images.unsplash.com/photo-1553530666-ba11a7da3888?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c21vb3RoaWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60]
  
  ### Website links credits 
-Most of my research that used to buoild this app was inspired from the following websites.
-Youtube developers tutorials
-[Bootstrap 4] (https://getbootstrap.com/docs/4.0/getting-started/introduction/)
-[Materialized](https://materializecss.com/)
-[Bootstrap starter snippets (Cleanblog)](https://startbootstrap.com/templates)
-[Stackoverflow](https://stackoverflow.com/)
-[colorib ] (https://colorlib.com/wp/themes/) gave me a different perspective and designs
+Most of my research thati used to build this app was inspired from the following websites.
+
+-Youtube developers tutorials [Julian Nash] (https://www.youtube.com/results?search_query=nash+python+flask)
+- [Bootstrap 4] (https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+- [Materialized](https://materializecss.com/)
+- [Bootstrap starter snippets (Cleanblog)](https://startbootstrap.com/templates)
+- [Stackoverflow](https://stackoverflow.com/)
+- [colorib ] (https://colorlib.com/wp/themes/) gave me a different perspective and designs
 
  Acknowledgments
 -------------------
-Hat tip to anyone whose code was used
+
 * The code institute tutorial by `Mr. Tim Nelson`. This design of the templates are inspired by Mr Nelsons tutorial.
 * All the code institute tutors 
 *  [Mr. Can Casullu]  My mentor thankj you for putting up with me
