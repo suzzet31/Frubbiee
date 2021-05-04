@@ -3,7 +3,7 @@ import pymongo
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, 
-    send_from_directory, make_response, send_file)
+    send_from_directory, make_response, send_file,)
 from flask_admin import Admin   
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -12,11 +12,7 @@ if os.path.exists("env.py"):
     import env
 
 
-
 app = Flask(__name__)
-
-UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
@@ -229,6 +225,12 @@ def gallery():
 
         filename = mongo.db.filename.find_one()
         return render_template("gallery.html", filename=filename)
+
+
+@app.route("/image.jpg")
+def image():
+    return render_template("image.jpg")
+
 
 
 
