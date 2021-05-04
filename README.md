@@ -211,9 +211,10 @@ Developers tests
  - In Google Chrome, go to the URL you want to audit. You can audit any URL on the web.
  - Open Chrome DevTools.
  - Click the Audits tab and on the application tab run the lighthouse generator.
+ - [lighthouse test.pdf](https://github.com/suzzet31/Frubbiee/files/6422498/lighthouse.test.pdf)
 
 * Nu HTML checker validator for html 
-* Check your code for PEP8 requirements. Just paste your code below is an image of the code checker results.
+* Check your code for PEP8 requirements. Just paste your code below is an image of the code checker results.![pep 8 online validator](https://user-images.githubusercontent.com/82264522/117035879-bd253380-acfc-11eb-87f1-9405cc95d243.PNG)
 
 ### User story
 
