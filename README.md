@@ -195,6 +195,26 @@ before testing  on real devices to enabe me to deliver a high-quality customer e
 
 Remotely control our devices for manual app testing to troubleshoot issues reported by your customers and verify the real-world user experiences such as the colours , the interfaces and the button functioalities that i was able to fix using the meterialized snippets.
 
+Developers tests
+---------------
+
+1. Test runs
+---------
+
+* CSS validator 
+ - enter the URL of the document you want to validate. Validation by file upload by selecting your file and paste it at the direct input and check validation.
+ - 1 Error found aboub the image background. 
+
+* lighthouse test
+ - Run Lighthouse in Chrome DevTools
+ - Lighthouse powers the Audits panel of Chrome DevTools. To run a report:
+ - In Google Chrome, go to the URL you want to audit. You can audit any URL on the web.
+ - Open Chrome DevTools.
+ - Click the Audits tab and on the application tab run the lighthouse generator.
+
+* Nu HTML checker validator for html 
+* Check your code for PEP8 requirements. Just paste your code below is an image of the code checker results.
+
 ### User story
 
 The main question was reaching out to others to share their ingredients?  
