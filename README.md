@@ -21,8 +21,9 @@ These platform will get you a ideas on how to create fresh smoothie reipes and d
 * create app.py using python flask framework and Materialize
 * CRUD (create/read/upadate and delete)
 * pages
+* User story
 * Running the tests
-* Code languages used 
+* Code languages used
 * Deployment
 * Built With
 * Media
@@ -74,35 +75,32 @@ you create a database and add its first collection at the same time: Click Creat
 Database to open the dialog. Enter the name of the database and its first collection.
 
 
-Creating an Atlas Account — Creating an Atlas Account. First, you'll need to register 
-for an account on the MongoDB Atlas landing pageusing your gmail account
-Choose a MongoDB Atlas Cluster and Cloud Provider within your region to Create a MongoDB Atlas User Prompt
-select the free cluster type by create an Atlas Free Tier C Databases and Collections
+Creating an Atlas Account —
 
-create a cluster by selecting a AWS cloud provider, region (IRELAND) cluster tier(free)
-Under the admin interface in the cluster button create a cluster name of your project
-Once you have created you configur the cluster.On the left column select clusters. and the main three options that we
-will be mainly using are the
+1. Creating an Atlas Account. 
+2. First, you'll need to register for an account on the MongoDB Atlas landing pageusing your gmail account.
+3. Choose a MongoDB Atlas Cluster and Cloud Provider within your region to Create a MongoDB Atlas User Prompt.
+4. Select the free cluster type by create an Atlas Free Tier C Databases and Collections.
+5. Create a cluster by selecting a AWS cloud provider, region (IRELAND) cluster tier(free).
+6. Under the admin interface in the cluster button create a cluster name of your project.
+7. Configur the cluster.On the left column select clusters. There are  three main options that we will be mainly using ;
 
  - connect 
  - Metrics
  - collection
 
-Select the  connect button 
+ 8. Select the  connect button 
 This provides you a link that will enable you to connect your clutter to your ide platform.
-By creating your cluster, we add a SCRAM username and password  that is to be stored in .gitignore folder.
-
-Next click on 'Network Access' within the Security menu,
-in order to whitelist our IP address and make sure that it has access to our database.
-Click 'Add IP Address', and for now, we are going to select 'Allow Access From Anywhere',
-
-Then click on  'Collections' button. to create our own data, 
+9. By creating your cluster, we add a SCRAM username and password  that is to be stored in .gitignore folder.
+10. Next click on 'Network Access' within the Security menu, in order to whitelist our IP address and make sure that it has access to our database.
+11. Click 'Add IP Address', and for now, we are going to select 'Allow Access From Anywhere'.
+12. Then click on  'Collections' button. to create our own data, 
 This is where we can create our database collection  
 
 
-Click on database.
-Enter the Database Name and the Collection Name. Enter the Database Name and the Collection Name to create the database and create your password and the name of the data collections
-Click Create. Upon successful creation, the database and the collection appears in the Data Explorer
+13 .Click on database.
+14. Enter the Database Name and the Collection Name. Enter the Database Name and the Collection Name to create the database and create your password and the name of the data collections
+15. Click Create. Upon successful creation, the database and the collection appears in the Data Explorer
 that will be linked to the ide platform You use jinja blocks to inject content  variable blocks that generates the database in any text-based format
 
 
@@ -187,8 +185,6 @@ Create a base template we need to install diffrent python functionalities to cre
  * Delete pages/categories/recipes using the delete functionalities in the cancle and done button
 
 
-When a user submits an edit task form, they are sending their updated task data to the database
-
 ### Running the tests
 
 To run the automated tests for this system
@@ -198,6 +194,21 @@ by selceting the developer inspect property to initiate the page into different 
 before testing  on real devices to enabe me to deliver a high-quality customer experience by using the autometed real such as android and iOS devices.
 
 Remotely control our devices for manual app testing to troubleshoot issues reported by your customers and verify the real-world user experiences such as the colours , the interfaces and the button functioalities that i was able to fix using the meterialized snippets.
+
+### User story
+
+The main question was reaching out to others to share their ingredients?  
+I took this into consideration and would like to make it a platform that can provide more than just smoothie ideas but also testimonial and comments on how fresh drinks can benefit us a community. 
+
+To do this I will need to add in features like comment and sharing section. That is something to look into in the future
+The page was considered as very appealing, but it took the user a while to familiarise with the pages. 
+
+I had to change to be easy to access and use.
+The user recommender that it would be great to have an upload button so that they can share images of their new recipes. 
+I like the idea and I will revert to that.
+
+The categories that people would prefer in term of have a fresh drink at home. 
+The user laid out that the layout on the mobile and the desktop are self-explanatory that makes it easy to understand the layout and enables me as a developer to get a quick overview of all of the features that need to be applied or developed in order to satisfy the user. In both the look and feel section.
 
 
 
@@ -210,7 +221,6 @@ And coding style tests
  * `CSS
  * `Javascript
  * `Python Flask
- 
 
 ### Deployment
 
